@@ -4,6 +4,12 @@ from django.shortcuts import render
 
 def index(request):
 
+    pass
 
-    return None
+
+def login(request):
+    pass
+
+def register(request):
+    pass
 

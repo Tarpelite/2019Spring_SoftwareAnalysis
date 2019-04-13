@@ -6,5 +6,21 @@ body{
 .form{background: rgba(255,255,255,0.2);width:400px;margin:120px auto;}
 /*阴影*/
 .fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
-input[type="text"],input[type="password"]{padding-left:26px;}
+input[type="text"],input[type="password"],input[type="email"],input[type='tel']{padding-left:26px;}
+
+
 .checkbox{padding-left:21px;}
+
+.form2{background: rgba(255,255,255,0.8);width:500px;margin:120px auto;}
+.fa2{padding-left:26px}
+
+#username1{
+    padding-left:26px;
+    padding-right:26px;
+
+}
+
+h3{
+    font-style:italic;
+}
+
