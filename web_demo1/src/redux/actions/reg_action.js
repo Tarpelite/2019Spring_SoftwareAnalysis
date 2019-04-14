@@ -8,3 +8,7 @@ export  const close_regaction={
 export const login_action={
     type:"login"
 }
+
+export const quit_action={
+    type:"quit"
+}

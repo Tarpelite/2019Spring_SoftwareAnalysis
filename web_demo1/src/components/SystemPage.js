@@ -7,6 +7,9 @@ import PersonalInformation from "./PersonalInformation";
 import MyAccount from "./MyAccount";
 import MyResources from "./MyResources";
 import logo from '../image/logo.png';
+import {close_regaction, quit_action} from "../redux/actions/reg_action";
+import {connect} from "react-redux";
+import {Redirect }from "react-router-dom"
 
 
 const { Header, Sider, Content } = Layout;
@@ -25,6 +28,10 @@ class SystemPage extends Component{
         });
     }
     render() {
+        if (!this.props.loginflag)
+        {
+            return<Redirect to={"/"}/>
+        }
         return(<div>
             <Layout style={{height:"100%",minHeight:"720px",background: "rgb(32,96,79)"}}>
                 <Sider
@@ -39,7 +46,7 @@ class SystemPage extends Component{
                         <br/>
 
                         <p style={{padding:"10px"}}>用户你好</p>
-
+                        <a onClick={this.props.quit}>注销登录</a>
                         <div style={{margin:"10%",padding:"10%"}}></div>
                         <Menu.Item key="1" >
                             <Link to={"/system/"}>
@@ -118,4 +125,20 @@ class SystemPage extends Component{
 
 }
 
+
+function mapStateToProps(state)
+{
+    return{
+        loginflag:state.login.loginflag
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+
+        quit:()=>{dispatch(quit_action)},
+
+    }
+}
+SystemPage=connect(mapStateToProps,mapDispatchToProps)(SystemPage)
 export default SystemPage;

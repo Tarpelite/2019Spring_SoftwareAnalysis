@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Card,Layout, Menu, Icon ,Button,Form,Input,Checkbox} from 'antd';
+import {Card, Layout, Menu, Icon, Button, Form, Input, Checkbox, Avatar} from 'antd';
 import {Redirect }from "react-router-dom"
 import logo from '../image/logo.png';
 import {connect} from "react-redux"
 import {regaction, close_regaction, login_action} from "../redux/actions/reg_action";
 import "../css/background.css"
+import Register from "./Register";
 
 const {
     Header, Content, Footer, Sider,
@@ -29,7 +30,7 @@ class Login extends Component{
     }*/
 
 
-    loginSubmit = (e) => {
+    /*loginSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -38,9 +39,9 @@ class Login extends Component{
 
             }
         });
-    }
+    }*/
 
-    registerSubmit = (e) => {
+    /*registerSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -48,17 +49,28 @@ class Login extends Component{
 
             }
         });
-    }
+    }*/
 
-    closeregister=()=>{
+   /* closeregister=()=>{
         this.setState({
             registerFlag:false
         })
-    }
+    }*/
 
 componentDidMount() {
         console.log(this.props.registerFlag)
 }
+
+//登录提交的方法
+    LoginSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+                this.props.loginsubmit();
+            }
+        });
+    }
 
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -100,81 +112,12 @@ componentDidMount() {
                     <img src={logo} className={"logo"}/>
 
                     {
-                        this.props.registerFlag?
-
-                            <div className={"register-form"}>{/*注册框*/}
-
-                                <Icon type="close" className={"close"} onClick={this.props.closeregister}  />
-                                <Form {...formItemLayout}  onSubmit={this.registerSubmit}>
-                                    <h2>注册</h2>
-                                    <Form.Item label={"用户名"} >
-                                        {getFieldDecorator('registerUsername', {
-                                            rules: [{
-                                                 message: '请输入用户名!',
-                                            }, {
-                                                required: true, message: 'Please input your username!',
-                                            }],
-                                        })(
-                                            <Input />
-                                        )}
-                                    </Form.Item>
-                                    <Form.Item
-                                        label="密码"
-                                    >
-                                        {getFieldDecorator('password', {
-                                            rules: [{
-                                                required: true, message: 'Please input your password!',
-                                            }, {
-                                                validator: this.validateToNextPassword,
-                                            }],
-                                        })(
-                                            <Input type="password" />
-                                        )}
-                                    </Form.Item>
-
-                                <Form.Item
-                                    label="确认密码"
-                                >
-                                    {getFieldDecorator('confirm', {
-                                        rules: [{
-                                            required: true, message: 'Please confirm your password!',
-                                        }, {
-                                            validator: this.compareToFirstPassword,
-                                        }],
-                                    })(
-                                        <Input type="password" onBlur={this.handleConfirmBlur} />
-                                    )}
-                                </Form.Item>
-                                    <Form.Item
-                                        label="手机号"
-                                    >
-                                        {getFieldDecorator('phone', {
-                                            rules: [{ required: true, message: 'Please input your phone number!' }],
-                                        })(
-                                            <Input  style={{ width: '100%' }} />
-                                        )}
-                                    </Form.Item>
-                                    <Form.Item {...tailFormItemLayout}>
-                                        {getFieldDecorator('agreement', {
-                                            valuePropName: 'checked',
-                                        })(
-                                            <Checkbox>I have read the <a href="">agreement</a></Checkbox>
-                                        )}
-                                    </Form.Item>
-                                    <Form.Item {...tailFormItemLayout}>
-                                        <Button type="primary" htmlType="submit">Register</Button>
-                                    </Form.Item>
-                            </Form>
-
-
-
-
-
-                            </div>
-
-                        :
+                        this.props.registerFlag ?
+                            <Register/>
+                            :
                             <div></div>
                     }
+
                 </div>
 
 
@@ -182,9 +125,9 @@ componentDidMount() {
             <div className={"login"}>
                 <h2 >登录部分</h2>
                 <br/>
-                <Form onSubmit={loginsubmit}style={{margin:"auto",marginTop:"60%",marginBottom:"100%"}}>
+                <Form onSubmit={this.LoginSubmit}style={{margin:"auto",marginTop:"10%",marginBottom:"100%"}}>
 
-
+                    <Avatar shape="square" size={100} icon="user" style={{display:"inline-block",margin:"50px"}}/>
                     <Form.Item>
                         {getFieldDecorator('loginUserName', {
                             rules: [{ required: true, message: 'Please input your username!' }],
@@ -230,8 +173,7 @@ function mapDispatchToProps(dispatch){
     return{
         register:()=>{dispatch(regaction)},
         closeregister:()=>{dispatch(close_regaction)},
-        loginsubmit:(e)=>{
-            e.preventDefault();
+        loginsubmit:(value)=>{
         dispatch(login_action);
         }
     }
