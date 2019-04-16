@@ -64,7 +64,11 @@ class Author(models.Model):
     name = models.CharField(max_length=255)
     institute = models.CharField(max_length=255, blank=True)
     domain = models.CharField(max_length=255, blank=True)
-    bind = models.ForeignKey(User, on_delete=models.CASCADE, default='', null=True, blank=True)
+    bind = models.OneToOneField(User, on_delete=models.CASCADE, default='', null=True, blank=True)
+    citation_times = models.IntegerField(default=0, blank=True)
+    article_numbers = models.IntegerField(default=0, blank=True)
+    h_index = models.IntegerField(default=0, blank=True)
+    g_index = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
         return self.name
@@ -77,6 +81,9 @@ class U2E_apply_form(models.Model):
     created_time = models.DateTimeField(auto_created=True)
     approve_time = models.DateTimeField(null=True, blank=True)
     approved = models.BooleanField(default=False)
+    name = models.CharField(max_length=255, default=" ")
+    institute = models.CharField(max_length=255, blank=True)
+    domain = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         user_obj = User.objects.get(user_ID=self.user_ID)
@@ -96,7 +103,68 @@ class starForm(models.Model):
          # user = User.objectes.get(user_ID=self.user_ID)
          # resource = Resource.objects.get(resource_ID = self.resource_ID)
          # return user.username+":" + resource.title
-         return "{0}-{1}".format(self.user_ID.username,self.resource_ID.title)
+         return "{0}-{1}".format(self.user_ID.username, self.resource_ID.title)
+
+
+class Transaction(models.Model):
+
+    t_ID = models.AutoField(primary_key=True)
+    user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
+    resource_ID = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    created_time = models.DateTimeField(auto_created=True)
+
+    def __str__(self):
+
+        return "{0}-{1}".format(self.user_ID.username, self.resource_ID.title)
+
+
+class A2R(models.Model):
+
+    form_ID = models.AutoField(primary_key=True)
+    author_ID = models.ForeignKey(Author, on_delete=models.CASCADE)
+    resource_ID = models.ForeignKey(Resource, on_delete=models.CASCADE)
+
+    def __str__(self):
+
+        return "{0}-{1}".format(self.user_ID.username, self.resource_ID.title)
+
+
+class ItemCart(models.Model):
+
+    r_ID = models.AutoField(primary_key=True)
+    user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
+    resource_ID = models.ForeignKey(Resource, on_delete=models.CASCADE)
+
+    def __str__(self):
+
+        return "{0}-{1}".format(self.user_ID.username, self.resource_ID.title)
+
+
+class publish_item_application_form(models.Model):
+
+    TYPE_CHOICES = (
+        ("P1", "Paper"),
+        ("P2", "Patent"),
+        ("P3", "Project"),
+    )
+
+    f_ID = models.AutoField(primary_key=True)
+    author_ID = models.ForeignKey(Author, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    authors = models.TextField(blank=True)  # split by ','
+    intro = models.TextField(blank=True)
+    url = models.TextField(blank=True)
+    price = models.IntegerField(default=0)
+    Type = models.CharField(max_length=2, choices=TYPE_CHOICES)
+    passed = models.BooleanField(default=False)
+    created_time = models.DateTimeField(auto_created=True)
+
+    def __str__(self):
+        return "{0}-{1}".format(self.author_ID.name, self.title)
+
+
+
+
 
 
 
