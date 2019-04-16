@@ -491,15 +491,58 @@ def U2E_pass(request):
     username = request.GET.get("username")
     u1 = User.objects.get(username=username)
     form = U2E_apply_form.objects.get(user_ID=u1)
-
+    status = False
     try:
         u1.Type = 'E'
-        u1.name  = form.name
+        u1.name = form.name
         u1.introduction = form.intro
         u1.institute = form.institute
         u1.domain = form.domain
         u1.save()
-        Author.objects.create()
+        Author.objects.create(name=form.name,
+                              sex='M',
+                              institute=form.institute,
+                              domain=form.domain,
+                              bind=u1)
+        form.delete()
+    except ObjectDoesNotExist:
+        status = False
+
+    result = {
+        "status": status
+    }
+
+    return JsonResponse(result, json_dumps_params=json_config)
+
+
+def PUB_pass(request):
+
+    username = request.GET.get("username")
+    u1 = User.objects.get(username=username)
+    f_ID = request.GET.get("")
+    form = publish_item_application_form.get(f_ID=f_ID)
+    status = False
+
+    try:
+        Resource.objects.create(title = form.title,
+                                authors = form.authors,
+                                intro = form.intro,
+                                url = form.url,
+                                price = form.price,
+                                Type = form.Type)
+        form.passed = True
+        form.save()
+
+    except ObjectDoesNotExist:
+        status = True
+
+    result = {
+        "status":status
+    }
+
+    return JsonResponse(result, json_dumps_params=json_config)
+
+
 
 
 
