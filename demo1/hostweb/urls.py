@@ -1,11 +1,26 @@
-from django.urls import path,include
-from django.conf.urls import url
-
+from django.urls import path
 from . import views
 
-
 urlpatterns = [
-    url(r'login/', views.login),
-    url(r'register', views.register),
-    url(r'index/', views.index),
+    path('index/', views.index, name = 'index'),
+    path('login/', views.login),
+    path('register/', views.register),
+    path('search/', views.search),
+    path('profile/', views.profile),
+    path('profile_edit/', views.profile_edit),
+    path('star/', views.star),
+    path('unstar/', views.unstar),
+    path('my_collections/', views.my_collections),
+    path('my_account/', views.my_account),
+    path('buyed_resource/', views.buyed_resource),
+    path('expert_home/', views.expert_home),
+    path('add_item_list/', views.add_item_list),
+    path('remove_item_list', views.remove_item_list),
+    path('item_cart/', views.item_cart),
+    path('purchase/', views.purchase),
+    path('apply_for_expert/', views.apply_for_expert),
+    path('has_published/', views.has_published),
+    path('publish_item_application/', views.publish_item_application),
+    path('U2E_pass/', views.U2E_pass),
+    path('PUB_pass/', views.PUB_pass)
 ]
