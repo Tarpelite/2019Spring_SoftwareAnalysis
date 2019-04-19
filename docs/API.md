@@ -33,7 +33,7 @@ return:{用户名，手机号，邮箱，is_expert， 介绍，机构，姓名�
 ##  个人信息修改
 
 url: profile_edit/
-post:{用户名，手机号，邮箱，is_expert， 介绍，机构，姓名，领域}
+post:{原用户名，新用户名，手机号，邮箱，is_expert， 介绍，机构，姓名，领域}
 return:{status:{0,1}}
 
 ## star
@@ -51,7 +51,7 @@ post:{用户名， 资源ID}
 
 url: my_collections/
 post;{user_name}
-return:{资源名，类型，介绍，资源url， 作者，作者url, 价格， buyed, 价格}
+return:{资源名，类型，介绍，资源url， 作者，作者url, 价格， buyed}
 
 ## 我的账户
 
@@ -63,7 +63,7 @@ return;{balance}
 
 url: buyed_resouce/
 post:{username}
-return:{资源名， 类型， 介绍，资源url, 作者， 作者url, 价格， 价格}
+return:{资源名， 类型， 介绍，资源url, 作者， 作者url, 价格}
 
 ## 专家门户
 
@@ -92,14 +92,14 @@ return:{类似已购资源}
 ## 结算
 
 url: purchase/
-post:{username, item_list}
+post:{username, item_list, total_cost}  
 return:{status , balance}
 
 
 ## 申请成为专家
 
 url: apply_for_expert/
-post:{username}  
+post:{username, name, sex, institue, domain}  
 return:{status}  
 
 ## 获取专家已发布资源
@@ -109,15 +109,9 @@ post:{username}
 return:{类似已购资源}
 
 
-## 成为专家申请列表  
-
-url: U2E_application_list/
-post:{username}
-return:{username,申请表}
-
 ## 发布资源申请列表
 
-url: publish_item_application_list/
+url: publish_item_application/
 post:{username}
 return:{username, 资源申请表}
 

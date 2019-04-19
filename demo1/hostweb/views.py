@@ -16,17 +16,18 @@ json_config={
 def login(request):
 
     username = request.GET.get('username')
-    passwd = request.GET.get('password')
+    passwd = request.GET.get('passwd')
     is_expert = "0"
-    status = "1"
-
+    status = True
+    #print("{0}-{1}".format(username, passwd))
     try:
         user = User.objects.get(username=username, passwd=passwd)
+        print(user)
         if user.is_expert():
-            is_expert = "1"
-        status = "1"
+            is_expert = True
+        status = True
     except ObjectDoesNotExist:
-        status = "0"
+        status = False
 
     result = {
         "status": status,
@@ -41,11 +42,14 @@ def register(request):
     passwd = request.GET.get('passwd')
     telephone = request.GET.get('telephone')
 
-    status = "0"
+    status = False
     ans = User.objects.filter(username = username)
-    if len(ans)  == 0:
-     User.objects.create(username=username, passwd=passwd, telephone=telephone, Type="U")
-     status = "1"
+    if len(ans) == 0:
+        try:
+            User.objects.create(username=username, passwd=passwd, telephone=telephone, Type="U")
+            status = True
+        except ObjectDoesNotExist:
+            status = False
 
     result = {
         "status": status,
