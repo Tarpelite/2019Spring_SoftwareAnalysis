@@ -6,9 +6,8 @@ urlpatterns = [
     path('login/', views.login),
     path('register/', views.register),
     path('search/', views.search),
-    path('profile/', views.profile),
-    path('profile_edit/', views.profile_edit),
-    path('star/', views.star),
+    path('profile/<int:pk>/', views.profile),
+    path('star/<int:pk>/', views.star),
     path('unstar/', views.unstar),
     path('my_collections/', views.my_collections),
     path('my_account/', views.my_account),
@@ -22,5 +21,7 @@ urlpatterns = [
     path('has_published/', views.has_published),
     path('publish_item_application/', views.publish_item_application),
     path('U2E_pass/', views.U2E_pass),
-    path('PUB_pass/', views.PUB_pass)
+    path('PUB_pass/', views.PUB_pass),
+    path('api-test/Users/', views.User_list),
+    path('api-test/resource_list/', views.resource_list),
 ]

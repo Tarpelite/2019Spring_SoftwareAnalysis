@@ -4,20 +4,35 @@ from hostweb.models import  *
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 import json
-# Create your views here.
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+from hostweb.Se import *
 
-json_config={
-    'ensure_ascii':False,
+json_config = {
+    'ensure_ascii': False,
 }
 
+def User_list(request):
 
+    if request.method == "GET":
+        Users = User.objects.all()
+        se = Userserializer(Users, many=True)
+        return JsonResponse(se.data, safe=False, json_dumps_params=json_config)
 
+def resource_list(request):
+
+    if request.method == "GET":
+        resouces = Resource.objects.all()
+        se = ResourceSerializer(resouces, many=True)
+        return JsonResponse(se.data, safe=False)
 
 def login(request):
 
     username = request.GET.get('username')
     passwd = request.GET.get('passwd')
-    is_expert = "0"
+    is_expert = False
     status = True
     #print("{0}-{1}".format(username, passwd))
     try:
@@ -58,6 +73,7 @@ def register(request):
     return JsonResponse(result, json_dumps_params=json_config)
 
 
+@api_view(['GET'])
 def index(request):
 
     '''
@@ -66,98 +82,62 @@ def index(request):
     :return:
     '''
 
-    username = request.GET.get('username')
-    ans = User.objects.get(username=username)
-    avatar_url = ans.avatar_url
-    result = {
-        "avatar_url": avatar_url,
-        "news_cnt": 2,
-        "news": [{
-            "rank": 0,
-            "title": "article_1",
-            "url": "#",
-            "author": "au1",
-            "author_url": "au2",
-        }, {
-            "rank": 1,
-            "title": "article_2",
-            "url": "#",
-            "author":"au2",
-            "author_url": "au3",
-        }],
-        "ranking_cnt": 2,
-        "ranking_list": [{
-            "rank": 0,
-            "title": "title1",
-            "title_url": "title_url",
-        }, {
-            "rank": 1,
-            "title": "title2",
-            "title_url": "title_url",
-        }]
-
-    }
-    return JsonResponse(result, json_dumps_params=json_config)
+    if request.method == "GET":
+        resouces = Resource.objects.all()
+        se = ResourceSerializer(resouces, many=True)
+        return JsonResponse(se.data, safe=False)
 
 
+@api_view(['GET'])
 def search(request):
-    keywords = request.GET.get('keywords')
-    result = {
-        "num": 0,
-        "article_list":[]
 
-    }
-    return JsonResponse(result, json_dumps_params=json_config)
+    if request.method == "GET":
+        keywords = request.GET.get('keywords')
+        keywords = str(keywords).strip()
+        #print(keywords)
+        ans = Resource.objects.filter(title__contains=keywords)
+        se = ResourceSerializer(ans, many=True)
+        return JsonResponse(se.data, safe=False)
 
-
-def profile(request):
-    username = request.GET.get('username')
-    user = User.objects.get(username=username)
-
-    query_ans = U2E_apply_form.objects.filter(user_ID = user.user_ID)
-    status = False
-    if len(query_ans) > 0:
-        status = True
-
-    result = {
-        "user_ID":user.user_ID,
-        "username": username,
-        "telephone": user.telephone,
-        "email": user.mail,
-        "is_expert": user.is_expert(),
-        "intro": user.introduction,
-        "domain": user.domain,
-        "institute": user.institute,
-        "is_applying": status
-
-    }
-
-    return JsonResponse(result, json_dumps_params=json_config)
-
-
-def profile_edit(request):
-
-    user_ID = request.POST.get('user_ID')
-    user = User.objects.get(user_ID=user_ID)
-    status = False
+@api_view(['GET', 'PUT'])
+def profile(request, pk):
+    print(request.GET)
     try:
-        user.username = request.POST.get('username')
-        user.telephone = request.POST.get('telephone')
-        user.mail = request.POST.get('email')
-        user.institute = request.POST.get('institute')
-        user.introduction = request.POST.get('intro')
-        user.name = request.POST.get('username')
-        user.domain = request.POST.get('domain')
-        status = True
-    except ObjectDoesNotExist:
-        status = False
+        user = User.objects.get(user_ID=pk)
+    except User.DoesNotExist:
+        return HttpResponse(status=404)
+    if request.method == "GET":
+        se = Userserializer(user)
+        return JsonResponse(se.data, safe=False)
+    elif request.method == "PUT":
+        print(request.data)
+        se = Userserializer(user, data=request.data)
+        if se.is_valid():
+            se.save()
+            return JsonResponse(se.data)
+        return JsonResponse(se.errors, status=400)
 
-    result = {
-        "status": status
-    }
+@api_view(['POST', 'DELETE'])
+def star(request, pk):
+    print(pk)
+    print(request.data)
+    print(request.POST)
+    if request.method == 'POST':
+        serializer = starFormSerializer(data=request.POST)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
 
-    return JsonResponse(result, json_dumps_params=json_config)
+    elif request.method == 'DELETE':
+        try:
+            s1 = starForm.objects.get(form_ID=pk)
+        except starForm.DoesNotExist:
+            return JsonResponse(status=404)
+        s1.delete()
+        return JsonResponse(status=204)
 
+'''   
 def star(request):
 
     username = request.GET.get("username")
@@ -177,7 +157,7 @@ def star(request):
     }
     return JsonResponse(result, json_dumps_params=json_config)
 
-
+'''
 def unstar(request):
 
     username = request.GET.get("username")
