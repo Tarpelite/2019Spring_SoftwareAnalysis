@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d34fa179-74cb-4373-aa05-1f4b8f0bb9f9" name="Default Changelist" comment="更新部分购物车前端代码">
-      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SearchResult.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchResult.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -40,8 +39,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/SearchResult.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="27" column="69" selection-start-line="27" selection-start-column="69" selection-end-line="27" selection-end-column="69" />
+            <state relative-caret-position="280">
+              <caret line="70" column="81" selection-start-line="70" selection-start-column="81" selection-end-line="70" selection-end-column="81" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -312,12 +311,12 @@
       <workItem from="1556370422490" duration="5622000" />
       <workItem from="1556409955790" duration="13526000" />
       <workItem from="1556429306566" duration="4486000" />
-      <workItem from="1556437866090" duration="3326000" />
+      <workItem from="1556437866090" duration="5620000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="246613000" />
+    <option name="totallyTimeSpent" value="248907000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -330,7 +329,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15587847" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -346,7 +344,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.09065156" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.29320112" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -614,8 +612,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/SearchResult.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="27" column="69" selection-start-line="27" selection-start-column="69" selection-end-line="27" selection-end-column="69" />
+        <state relative-caret-position="280">
+          <caret line="70" column="81" selection-start-line="70" selection-start-column="81" selection-end-line="70" selection-end-column="81" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

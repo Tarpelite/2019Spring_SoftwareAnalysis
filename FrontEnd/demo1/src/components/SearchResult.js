@@ -26,10 +26,9 @@ class SearchPage extends Component{
     star=(resource_id)=>{
         /*this.props.loading();*/
         axios.post(`Http://127.0.0.1:8000/star/${this.props.user_id}/`, {
-            params: {
                 user_ID:this.props.user_id,
                 resource_ID:resource_id
-            }})
+        })
             .then( (response) =>{
                 console.log(response);
 
@@ -67,8 +66,10 @@ class SearchPage extends Component{
                             <List.Item.Meta
                                 /*avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}*/
                                 title={<a href={item.url}>{item.title}</a>}
-                                description={<div> <p>{`简介：${item.intro}`}</p><a href={item.url} target="_Blank">{item.authors}</a><Tag color={'geekblue'} >文章类型</Tag></div>}
+                                description={<div> <p>{`简介：${item.intro}`}</p></div>}
                             />
+                            <a href={item.url} target="_Blank">{item.authors}</a>
+                            <Tag color={'geekblue'} >文章类型</Tag>
                             <div><p>价格：{item.price}</p></div>
                         </Skeleton>
                     </List.Item>

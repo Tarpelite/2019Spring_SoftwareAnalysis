@@ -4,6 +4,7 @@
     <list default="true" id="494ac1a4-7ade-4230-a47d-036c4d80baa6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/FrontEnd/demo1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/demo1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/demo1/src/components/SearchResult.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/demo1/src/components/SearchResult.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/db.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,24 +13,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/demo1/hostweb/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1425">
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="211" />
     <option name="y" value="87" />
     <option name="width" value="1470" />
@@ -94,15 +83,15 @@
       <updated>1556429214659</updated>
       <workItem from="1556429215729" duration="1168000" />
       <workItem from="1556438006147" duration="148000" />
-      <workItem from="1556438155179" duration="2062000" />
+      <workItem from="1556438155179" duration="3405000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3378000" />
+    <option name="totallyTimeSpent" value="4721000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="169" y="70" width="1176" height="736" extended-state="0" />
+    <frame x="169" y="70" width="1176" height="736" extended-state="1" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24955277" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -133,9 +122,9 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/demo1/hostweb/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1425">
+        <state>
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#24#59#0" expanded="true" />
           </folding>
         </state>
       </provider>
