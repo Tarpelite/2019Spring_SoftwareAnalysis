@@ -119,6 +119,7 @@ def search(request, pk):
             record['price'] = r1.price
             record['authors'] = r1.authors
             record['url'] = r1.url
+            record['Type'] = r1.Type
             aus = r1.authors.split(",")
             for au in aus:
                 res_dict = {}
