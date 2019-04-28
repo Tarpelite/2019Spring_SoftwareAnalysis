@@ -89,15 +89,41 @@ def index(request):
 
 
 @api_view(['GET'])
-def search(request):
+def search(request, pk):
+    '''
+    return search results list
+
+    params:pk: user_ID
+
+    '''
 
     if request.method == "GET":
         keywords = request.GET.get('keywords')
         keywords = str(keywords).strip()
         #print(keywords)
         ans = Resource.objects.filter(title__contains=keywords)
-        se = ResourceSerializer(ans, many=True)
-        return JsonResponse(se.data, safe=False)
+        resource_list = []
+        cnt = 0
+        for obj in ans:
+            record = {}
+            resource_ID = obj.resource_ID
+            r1 = Resource.objects.get(resource_ID=resource_ID)
+            record['resource_ID'] = resource_ID
+            record['rank'] = cnt
+            record['title'] = r1.title
+            record['intro'] = r1.intro
+            record['price'] = r1.price
+            record['authors'] = r1.authors
+            record['url'] = r1.url
+            cnt += 1
+            is_star = starForm.objects.filter(user_ID=pk, resource_ID=resource_ID)
+            if len(is_star)> 0:
+                is_star = True
+            else:
+                is_star = False
+            record['is_star'] = is_star
+            resource_list.append(record)
+        return JsonResponse(resource_list, safe=False)
 
 @api_view(['GET', 'PUT'])
 def profile(request, pk):
@@ -135,6 +161,13 @@ def star(request, pk):
             return HttpResponse(status=404)
         s1.delete()
         return HttpResponse(status=204)
+
+'''
+@api_view(['GET'])
+def my_collections(request, pk):
+    stars = starForm.objectis.filter(user_ID=pk)
+    resources = Resource.objects.filter()
+'''
 
 @api_view(['GET'])
 def my_collections(request, pk):

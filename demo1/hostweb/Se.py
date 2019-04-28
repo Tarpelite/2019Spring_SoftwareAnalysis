@@ -41,7 +41,7 @@ class Userserializer(serializers.ModelSerializer):
 class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
-        fields = ('resource_ID', 'title', 'authors', 'intro', 'url', 'price', 'Type')
+        fields = '__all__'
 
     def create(self, validated_data):
         return Resource.objects.create(**validated_data)

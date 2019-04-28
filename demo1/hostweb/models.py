@@ -61,7 +61,7 @@ class Author(models.Model):
     )
 
     author_ID = models.AutoField(primary_key=True)
-    sex = models.CharField(max_length=1, choices=SEX_TYPE)
+    sex = models.CharField(max_length=1, choices=SEX_TYPE, default = 'M')
     name = models.CharField(max_length=255)
     institute = models.CharField(max_length=255, blank=True)
     domain = models.CharField(max_length=255, blank=True)
