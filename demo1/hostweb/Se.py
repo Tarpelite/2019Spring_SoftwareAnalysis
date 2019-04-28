@@ -62,6 +62,7 @@ class starFormSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = starForm
+        fields = '__all__'
 
     def create(self, validated_data):
         return starForm.objects.create(**validated_data)

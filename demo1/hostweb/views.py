@@ -119,72 +119,26 @@ def profile(request, pk):
 
 @api_view(['POST', 'DELETE'])
 def star(request, pk):
-    print(pk)
-    print(request.data)
-    print(request.POST)
     if request.method == 'POST':
-        serializer = starFormSerializer(data=request.POST)
-        if serializer.is_valid():
+       data = request.data
+       data["created_time"]=timezone.datetime.now() 
+       serializer = starFormSerializer(data=request.data)
+       if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+       return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
         try:
             s1 = starForm.objects.get(form_ID=pk)
         except starForm.DoesNotExist:
-            return JsonResponse(status=404)
+            return HttpResponse(status=404)
         s1.delete()
-        return JsonResponse(status=204)
+        return HttpResponse(status=204)
 
-'''   
-def star(request):
-
-    username = request.GET.get("username")
-    resource_ID = request.GET.get("resource_ID")
-
-    u1 = User.objects.get(username=username)
-    r1 = Resource.objects.get(resource_ID=resource_ID)
-
-    try:
-        starForm.objects.create(user_ID = u1, resource_ID=r1)
-        status = True
-    except ObjectDoesNotExist:
-        status = False
-
-    result = {
-        "status":status
-    }
-    return JsonResponse(result, json_dumps_params=json_config)
-
-'''
-def unstar(request):
-
-    username = request.GET.get("username")
-    resource_ID = request.GET.get("resource_ID")
-
-    u1 = User.objects.get(username=username)
-    r1 = Resource.objects.get(resource_ID=resource_ID)
-
-    try:
-        res = starForm.objects.filter(user_ID = u1, resource_ID=r1)
-        for obj in res:
-            obj.delete()
-        status = True
-    except ObjectDoesNotExist:
-        status = False
-
-    result = {
-        "status": status
-    }
-
-    return JsonResponse(result, json_dumps_params=json_config)
-
-def my_collections(request):
-
-    username = request.GET.get("username")
-    u1 = User.objects.get(username=username)
-    ans = starForm.objects.filter(user_ID=u1)
+@api_view(['GET'])
+def my_collections(request, pk):
+    ans = starForm.objects.filter(user_ID=pk)
     num = len(ans)
     resource_list = []
     cnt = 0
@@ -192,6 +146,7 @@ def my_collections(request):
         record = {}
         resource_ID = obj.resource_ID
         r1 = Resource.objects.get(resource_ID=resource_ID)
+        record['resource_ID'] = resource_ID
         record['rank'] = cnt
         record['title'] = r1.title
         record['intro'] = r1.introduction

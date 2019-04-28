@@ -31,9 +31,6 @@ class User(models.Model):
     def __str__(self):
         return self.username
     
-    class Meta:
-        ordering = ('created',)
-        
 
 
 class Resource(models.Model):
