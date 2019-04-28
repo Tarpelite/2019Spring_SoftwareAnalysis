@@ -98,7 +98,8 @@ class starForm(models.Model):
     user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     resource_ID = models.ForeignKey(Resource, on_delete=models.CASCADE)
     created_time = models.DateTimeField(auto_created=True)
-
+    class Meta:
+        unique_together=("user_ID", "resource_ID")
     def __str__(self):
 
          # user = User.objectes.get(user_ID=self.user_ID)
