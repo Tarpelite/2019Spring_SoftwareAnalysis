@@ -62,7 +62,7 @@ class Author(models.Model):
 
     author_ID = models.AutoField(primary_key=True)
     sex = models.CharField(max_length=1, choices=SEX_TYPE, default = 'M')
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     institute = models.CharField(max_length=255, blank=True)
     domain = models.CharField(max_length=255, blank=True)
     bind = models.OneToOneField(User, on_delete=models.CASCADE, default='', null=True, blank=True)
