@@ -49,6 +49,7 @@ class Resource(models.Model):
     price = models.IntegerField(default=0)
     Type = models.CharField(max_length=2, choices=TYPE_CHOICES)
     publisher = models.CharField(max_length=255, blank=True)
+    publish_date = models.CharField(max_length=255, blank=True)
     citation_numbers = models.IntegerField(default=0, blank=True)
     agency = models.CharField(max_length=255, blank=True)
     patent_number = models.TextField(blank=True)
