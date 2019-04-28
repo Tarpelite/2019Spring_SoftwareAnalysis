@@ -61,16 +61,19 @@ class SearchPage extends Component{
                 /*loadMore={loadMore}*/
                 dataSource={this.props.result_list}
                 renderItem={item => (
-                    <List.Item actions={[<a>加入购物车</a>, <a onClick={()=>{console.log(item);this.star(item.resource_ID)}}><Icon type={"star"} /></a>]}>
+                    <List.Item actions={[<a>加入购物车</a>,
+                        <a onClick={()=>{console.log(item);this.star(item.resource_ID)}}>{item.is_star?<Icon type={"star"}theme={"filled"} />:<Icon type={"star"} />}</a>]}>
                         <Skeleton avatar title={false} loading={item.loading} active>
+                            <p>{item.rank}</p>
                             <List.Item.Meta
                                 /*avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}*/
                                 title={<a href={item.url}>{item.title}</a>}
                                 description={<div> <p>{`简介：${item.intro}`}</p></div>}
                             />
-                            <a href={item.url} target="_Blank">{item.authors}</a>
+                            <a href={item.url} target="_Blank" style={{margin:"10px",padding:"10px"}}>{item.authors}</a>
                             <Tag color={'geekblue'} >文章类型</Tag>
                             <div><p>价格：{item.price}</p></div>
+                            
                         </Skeleton>
                     </List.Item>
                 )}
