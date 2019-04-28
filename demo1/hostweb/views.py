@@ -186,6 +186,7 @@ def my_collections(request, pk):
 
 @api_view(['GET'])
 def my_collections(request, pk):
+    u1 = User.objects.get(user_ID=pk)
     ans = starForm.objects.filter(user_ID=pk)
     num = len(ans)
     resource_list = [] 
@@ -193,12 +194,12 @@ def my_collections(request, pk):
     for obj in ans:
         author_IDs = []
         record = {}
-        resource_ID = obj.resource_ID
-        r1 = Resource.objects.get(resource_ID=resource_ID)
-        record['resource_ID'] = resource_ID
+        r1 = obj.resource_ID
+        #r1 = Resource.objects.get(resource_ID=resource_ID)
+        record['resource_ID'] = r1.resource_ID
         record['rank'] = cnt
         record['title'] = r1.title
-        record['intro'] = r1.introduction
+        record['intro'] = r1.intro
         record['price'] = r1.price
         record['authors'] = r1.authors
         record['url'] = r1.url
@@ -216,7 +217,7 @@ def my_collections(request, pk):
         cnt += 1
         resource_list.append(record)
 
-        buyed_record = Resource.objects.filter(user_ID=u1, resource_ID=r1)
+        buyed_record = Transaction.objects.filter(user_ID=u1, resource_ID=r1)
         if len(buyed_record) > 0:
             record["buyed"] = True
         else:
