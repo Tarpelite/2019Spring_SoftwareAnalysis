@@ -48,6 +48,12 @@ class Resource(models.Model):
     url = models.TextField(blank=True)
     price = models.IntegerField(default=0)
     Type = models.CharField(max_length=2, choices=TYPE_CHOICES)
+    published_data = models.CharField(max_length=255, blank=True)
+    publisher = models.CharField(max_length=255, blank=True)
+    citation_numbers = models.IntegerField(default=0, blank=True)
+    agency = models.CharField(max_length=255, blank=True)
+    patent_number = models.TextField(blank=True)
+    patent_applicant_number = models.TextField(blank=True)
 
     def __str__(self):
         return self.title

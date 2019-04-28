@@ -5,4 +5,8 @@ data_path = "C:\\酋长的工作区\\2019系统分析与设计\\爬虫\\article.
 fields = []
 with open(data_path, encoding="utf-8") as f:
     for item in jsonlines.Reader(f):
-        print(item.keys())
+        url = item.get('url')
+        for k in item['data'].keys():
+            if k not in fields:
+                fields.append(k)
+print(fields)
