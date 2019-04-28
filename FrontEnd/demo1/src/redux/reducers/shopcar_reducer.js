@@ -2,14 +2,17 @@ const shopcar_reducer = ( state={data:[],selectedRowKeys:[]},action) => {
     switch(action.type) {
         case "get_shopcar"://从服务器将购物车全部覆盖本地数据的操作，需要把selectrowkey一起删掉
         {
+            console.log("进入设置购物车的reducer")
+            console.log(action)
             let newdata = [];
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < action.num; i++) {
+                console.log("进入设置redux的循环")
                 newdata.push({
-                    key: i,
-                    name: `资源 ${i}`,
-                    type:"论文",
-                    author: `作者. ${i}`,
-                    url:"https://www.jianshu.com/p/9cc2f7696300?from=timeline&isappinstalled=0",
+                    key: action.data[i].rank,
+                    name: action.data[i].title,
+                    type:action.data[i].type,
+                    author: action.data[i].authors,
+                    url:action.data[i].url,
                     author_url:"http://space.bilibili.com/123938419/"
                 });
             }

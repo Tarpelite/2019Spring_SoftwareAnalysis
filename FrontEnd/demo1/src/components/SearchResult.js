@@ -73,7 +73,7 @@ class SearchPage extends Component{
                             <a href={item.url} target="_Blank" style={{margin:"10px",padding:"10px"}}>{item.authors}</a>
                             <Tag color={'geekblue'} >文章类型</Tag>
                             <div><p>价格：{item.price}</p></div>
-                            
+
                         </Skeleton>
                     </List.Item>
                 )}

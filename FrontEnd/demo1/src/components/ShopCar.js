@@ -8,7 +8,7 @@ import axios from "axios"
 class ShopCar extends Component{
     constructor(props) {
         super(props);
-
+this.get_shopcar_data(this.props.user_id)
         /*this.props.init_stardata();*/
     }
 
@@ -44,13 +44,14 @@ class ShopCar extends Component{
     ];
 
     get_shopcar_data=(user_id)=>{
-        axios.get(`Http://127.0.0.1:8000/search/${this.props.user_id}`, {
+        axios.get(`Http://127.0.0.1:8000/item_cart/${user_id}`, {
             params: {
 
             }})
             .then( (response) =>{
                 console.log(response);
                 //设置购物车数据
+                this.props.get_shopcar_data(response.data.item_list,response.data.num)
             })
             .catch(function (error) {
                 console.log(error);
@@ -89,7 +90,7 @@ class ShopCar extends Component{
 
     }
 get_shopcar_data_test=()=>{
-        this.props.get_shopcar_data();
+
 }
 
 
@@ -134,7 +135,8 @@ get_shopcar_data_test=()=>{
 {
     return{
         data:state.shopcar.data,
-        selectedRowKeys:state.shopcar.selectedRowKeys
+        selectedRowKeys:state.shopcar.selectedRowKeys,
+        user_id:state.login.user_id
     }
 }
 
@@ -142,7 +144,7 @@ get_shopcar_data_test=()=>{
     return{
 
         set_selectedRowKeys:(selectedRowKeys)=>{dispatch({type: "set_shopcar_selectedRowKeys",selectedRowKeys:selectedRowKeys})},
-        get_shopcar_data:()=>{dispatch({type:"get_shopcar"})}
+        get_shopcar_data:(data,num)=>{dispatch({type:"get_shopcar",data:data,num:num})}
     }
 }
     ShopCar=connect(mapStateToProps,mapDispatchToProps)(ShopCar)
