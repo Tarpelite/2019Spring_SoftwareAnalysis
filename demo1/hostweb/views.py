@@ -380,7 +380,6 @@ def item_cart(request, pk):
         for au in aus:
            res_dict = {}
            res_dict['name'] = au
-           ids = Author.objects.get(name=au) 
            try:
                 ids = Author.objects.get(name=au)
                 res_dict['author_ID'] = ids.author_ID
