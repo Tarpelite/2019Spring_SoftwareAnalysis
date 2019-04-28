@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from hostweb.models import  *
@@ -281,24 +282,27 @@ def expert_home(request):
 
     return JsonResponse(result, json_dumps_params=json_config)
 
-
+@api_view(['POST'])
 def add_item_list(request, pk):
+    if request.method == "POST":
+        resource_ID_list = request.data["item_list"]
+        user = User.objects.get(user_ID=pk)
+        print(resource_ID_list)
 
-    resource_ID_list = request.GET.get("resource_ID_list")
-    status = False
-    try:
-        for resource_ID in resource_ID_list:
-            ItemCart.objects.create(user_ID = pk, resource_ID=resource_ID)
-            status = True
-    except ObjectDoesNotExist:
         status = False
+        try:
+            for resource_ID in resource_ID_list:
+                r = Resource.objects.get(resource_ID=resource_ID)
+                ItemCart.objects.create(user_ID = user, resource_ID=r)
+                status = True
+        except ObjectDoesNotExist:
+            status = False
 
-    result = {
-        "status":status,
-    }
+        result = {
+            "status":status,
+        }
 
-    return JsonResponse(result, json_dumps_params=json_config)
-
+        return JsonResponse(result, json_dumps_params=json_config)
 
 def remove_item_list(request, pk):
 
