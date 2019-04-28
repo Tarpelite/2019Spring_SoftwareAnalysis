@@ -47,6 +47,7 @@ def login(request):
     result = {
         "status": status,
         "is_expert": is_expert,
+        "user_ID":user.user_ID
     }
 
     return JsonResponse(result, json_dumps_params=json_config)
@@ -86,6 +87,7 @@ def index(request):
         resouces = Resource.objects.all()
         se = ResourceSerializer(resouces, many=True)
         return JsonResponse(se.data, safe=False)
+
 
 
 @api_view(['GET'])
