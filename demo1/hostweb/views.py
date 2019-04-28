@@ -284,7 +284,7 @@ def expert_home(request):
 
 def add_item_list(request, pk):
 
-    resource_ID_list = request.GET.get("resource_ID_list"))
+    resource_ID_list = request.GET.get("resource_ID_list")
     status = False
     try:
         for resource_ID in resource_ID_list:
@@ -300,15 +300,13 @@ def add_item_list(request, pk):
     return JsonResponse(result, json_dumps_params=json_config)
 
 
-def remove_item_list(request):
+def remove_item_list(request, pk):
 
     resource_ID_list = request.GET.get("resource_ID_list")
-    username = request.GET.get('username')
-    u1 = User.objects.get(username=username)
     status = False
     try:
         for resource_ID in resource_ID_list:
-            item = ItemCart.objects.get(user_ID=u1, resource_ID=resource_ID)
+            item = ItemCart.objects.get(user_ID=pk, resource_ID=resource_ID)
             item.delete()
             status = True
     except ObjectDoesNotExist:
@@ -320,12 +318,10 @@ def remove_item_list(request):
     return JsonResponse(result, json_dumps_params=json_config)
 
 
-def item_cart(request):
+def item_cart(request, pk):
 
-    username = request.GET.get('username')
-    u1 = User.objects.get(username=username)
     status = False
-    res = ItemCart.objects.filter(user_ID=u1)
+    res = ItemCart.objects.filter(user_ID=pk)
     cnt = 0
     item_list = []
     for item in res:
@@ -349,12 +345,11 @@ def item_cart(request):
     return JsonResponse(result, json_dumps_params=json_config)
 
 
-def purchase(request):
+def purchase(request, pk):
 
-    username = request.GET.get('username')
     item_list = request.GET.get('item_list')
     total_cost = request.GET.get('total_cost')
-    u1 = User.objects.get(username=username)
+    u1 = User.objects.get(user_ID = pk)
     status = False
 
     if total_cost > u1.balance:

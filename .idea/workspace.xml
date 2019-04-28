@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="494ac1a4-7ade-4230-a47d-036c4d80baa6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/2019Spring_SoftwareAnalysis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2019Spring_SoftwareAnalysis.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/demo1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/demo1/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo1/hostweb/echarts_demo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo1/hostweb/echarts_demo2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/hostweb/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/hostweb/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo1/hostweb/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo1/hostweb/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,16 +51,17 @@
       <updated>1556429214659</updated>
       <workItem from="1556429215729" duration="1168000" />
       <workItem from="1556438006147" duration="148000" />
+      <workItem from="1556438155179" duration="404000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1316000" />
+    <option name="totallyTimeSpent" value="1720000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="159" y="23" width="1176" height="736" extended-state="0" />
+    <frame x="169" y="70" width="1176" height="736" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24955277" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -74,7 +75,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.9155629" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.5910596" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
