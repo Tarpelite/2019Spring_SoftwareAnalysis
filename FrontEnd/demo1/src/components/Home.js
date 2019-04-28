@@ -1,17 +1,40 @@
 import React, { Component } from 'react';
 import { Input,Carousel,Card, Col, Row } from 'antd';
 import "../css/Home.css"
-class Home extends Component{
+import {connect} from "react-redux";
+import SearchPage from "./SearchResult";
 
+class Home extends Component{
+    constructor(props) {
+        super(props);
+        this.props.init();
+    }
+
+search=(value)=>{
+    console.log(value);
+    //非空检查
+    if(value!="")
+    this.props.dis_res(value)
+    else console.log("搜索框的输入不能为空")
+}
     render() {
+        if (this.props.dissearch_flag)
+        {
+            return(<div>
+                <SearchPage/>
+                <p>搜索结果</p>
+
+            </div>)
+        }
         return(<div style={{/*background: '#ECECEC'*/}}>
 
-            <h2>资源检索</h2>
+
+                <h2>资源检索</h2>
             <Input.Search
-                placeholder="input search text"
+                placeholder="这里是搜索测试，请输入你想获取几条数据，必须是数字"
                 enterButton="Search"
                 size="large"
-                onSearch={value => console.log(value)}
+                onSearch={value => this.search(value)}
                 style={{width:'80%'}}
             />
             <h2>资讯推荐</h2>
@@ -38,9 +61,24 @@ class Home extends Component{
                     </Col>
                 </Row>
             </div>
-        </div>)
+        </div>
+        )
     }
 }
 
+function mapStateToProps(state)
+{
+    return{
+        dissearch_flag:state.search.dis_flag,
+    }
+}
 
+function mapDispatchToProps(dispatch){
+    return{
+
+        dis_res:(keyword)=>{dispatch({type:"search",keyword:keyword})},
+init:()=>{dispatch({type:"search_init"})}
+    }
+}
+Home=connect(mapStateToProps,mapDispatchToProps)(Home)
 export default  Home;
