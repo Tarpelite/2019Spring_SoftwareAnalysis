@@ -14,7 +14,7 @@ urlpatterns = [
     path('expert_home/', views.expert_home),
     path('add_item_list/<int:pk>/', views.add_item_list),
     path('remove_item_list', views.remove_item_list),
-    path('item_cart/', views.item_cart),
+    path('item_cart/<int:pk>/', views.item_cart),
     path('purchase/', views.purchase),
     path('apply_for_expert/', views.apply_for_expert),
     path('has_published/', views.has_published),
