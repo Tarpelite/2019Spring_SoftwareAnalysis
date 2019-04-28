@@ -1,0 +1,111 @@
+
+
+.App {
+
+  text-align: center;
+  width: 100%;
+  height: 100%;
+
+  /*min-height: 1080px;
+  max-height: 100%;
+  background: url("./image/background.jpg") ;
+  background-size: cover;
+  !*padding-top: 10%;*!
+
+  object-fit: cover;*/
+}
+
+/*.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}*/
+
+/*.App-link {
+  color: #61dafb;
+}*/
+
+/*@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}*/
+
+
+.register-form{
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: rgba(178,178,178,0.35);
+margin-top: 10%;
+
+  padding: 20px;
+
+}
+
+
+.register-input{
+width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.login{
+  width:25%;
+  height: 100%;
+  float:right;
+  background-color: rgba(178,178,178,0.5);
+}
+
+/*.login-form{
+  margin: 20%;
+  margin-top: 20%;
+  border-radius: 15px;
+  padding: 20px;
+
+}*/
+
+#components-layout-demo-custom-trigger .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  margin: 16px;
+}
+
+.logo{
+  float: left;
+}
+
+.close{
+  float: right;
+}
+
+Menu.Item{
+  background-color: aquamarine;
+}
