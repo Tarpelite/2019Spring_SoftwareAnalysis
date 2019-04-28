@@ -16,6 +16,7 @@ class author(scrapy.Item):
 class article(scrapy.Item):
     data=scrapy.Field()
     url=scrapy.Field()
+    title=scrapy.Field()
 
 Maxpage=2
 Number=100
@@ -63,9 +64,12 @@ class AuthorSpider(CrawlSpider):
             key=a.css('div::text').extract()[0]
             if len(a.css('div::text').extract())>1:                
                 value=a.css('div::text').extract()[1]
+                dic[key]=value
             else:
                 value=response.css('div[style*="margin-bottom:1em"] a::text').get()
-            dic[key]=value
+                dic[key]=value
+                break
         art['data']=dic
         art['url']=response.css('.gsc_vcd_title_link::attr(href)').get()
+        art['title']=response.css('.gsc_vcd_title_link::text').get()
         yield art
