@@ -282,15 +282,13 @@ def expert_home(request):
     return JsonResponse(result, json_dumps_params=json_config)
 
 
-def add_item_list(request):
+def add_item_list(request, pk):
 
-    resource_ID_list = request.GET.get("resource_ID_list")
-    username = request.GET.get('username')
-    u1 = User.objects.get(username=username)
+    resource_ID_list = request.GET.get("resource_ID_list"))
     status = False
     try:
         for resource_ID in resource_ID_list:
-            ItemCart.objects.create(user_ID = u1, resource_ID=resource_ID)
+            ItemCart.objects.create(user_ID = pk, resource_ID=resource_ID)
             status = True
     except ObjectDoesNotExist:
         status = False
