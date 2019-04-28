@@ -323,25 +323,7 @@ def add_item_list(request, pk):
         } 
        return JsonResponse(result, json_dumps_params=json_config) 
 
-
-def remove_item_list(request, pk):
-
-    resource_ID_list = request.GET.get("resource_ID_list")
-    status = False
-    try:
-        for resource_ID in resource_ID_list:
-            item = ItemCart.objects.get(user_ID=pk, resource_ID=resource_ID)
-            item.delete()
-            status = True
-    except ObjectDoesNotExist:
-        status = False
-    result = {
-        "status": status,
-    }
-
-    return JsonResponse(result, json_dumps_params=json_config)
-
-
+@api_view(['GET'])
 def item_cart(request, pk):
 
     status = False
@@ -350,7 +332,8 @@ def item_cart(request, pk):
     item_list = []
     for item in res:
         record = {}
-        r1 = Resource.objects.get(resource_ID=item.resource_ID)
+        r1 = item.resource_ID
+        #r1 = Resource.objects.get(resource_ID=item.resource_ID.resource_ID)
         record['rank'] = cnt
         cnt += 1
         record['title'] = r1.title
