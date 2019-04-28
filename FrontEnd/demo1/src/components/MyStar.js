@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 class MyStar extends Component{
     constructor(props) {
         super(props);
-        /*this.init();*/
+
         this.props.init_stardata();
     }
 
@@ -42,21 +42,7 @@ class MyStar extends Component{
     }
     ];
 
-    /*state = {
-        selectedRowKeys: [], // Check here to configure the default column
-        loading: false,
-        data : []
-    };*/
-    start = () => {
-        this.setState({ loading: true });
-        // ajax request after empty completing
-        setTimeout(() => {
-            this.setState({
-                selectedRowKeys: [],
-                loading: false,
-            });
-        }, 1000);
-    }
+
     onSelectChange = (selectedRowKeys) => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         //这里应该就是将state的选中数组绑定到表格的操作了

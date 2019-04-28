@@ -48,7 +48,7 @@ componentDidMount() {
         console.log(this.props.form.getFieldValue("loginUserName"))
         console.log(this.props.form.getFieldValue("loginPassword"))
 
-        axios.get('Http://127.0.0.1:8000/login', {
+        axios.get('Http://127.0.0.1:8000/login/', {
             params: {
                 username: this.props.form.getFieldValue("loginUserName"),
                 passwd:this.props.form.getFieldValue("loginPassword")
@@ -59,7 +59,7 @@ componentDidMount() {
                 if (response.data.status)
                 {
                     console.log("密码正确，开始登录");
-                    this.props.loginsubmit(this.props.form.getFieldValue("loginUserName"),response.data.is_expert);
+                    this.props.loginsubmit(this.props.form.getFieldValue("loginUserName"),response.data.is_expert,response.data.user_ID);
                 }
                 else {alert("登录失败")}
             })
@@ -152,8 +152,8 @@ function mapDispatchToProps(dispatch){
     return{
         register:()=>{dispatch(regaction)},
         closeregister:()=>{dispatch(close_regaction)},
-        loginsubmit:(username,is_expert)=>{
-        dispatch({type:"login",username:username,is_expert:is_expert});
+        loginsubmit:(username,is_expert,user_id)=>{
+        dispatch({type:"login",username:username,is_expert:is_expert,user_id:user_id});
         }
     }
 }
