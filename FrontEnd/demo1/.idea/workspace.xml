@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d34fa179-74cb-4373-aa05-1f4b8f0bb9f9" name="Default Changelist" comment="更新部分购物车前端代码" />
+    <list default="true" id="d34fa179-74cb-4373-aa05-1f4b8f0bb9f9" name="Default Changelist" comment="更新部分购物车前端代码">
+      <change beforePath="$PROJECT_DIR$/src/components/MyStar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyStar.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -55,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/ShopCar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-797">
-              <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+            <state relative-caret-position="421">
+              <caret line="56" column="35" lean-forward="true" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
                 <element signature="e#303#1180#0" />
@@ -86,13 +88,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/MyStar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="135" selection-start-line="135" selection-end-line="152" selection-end-column="58" />
+            <state relative-caret-position="1372">
+              <caret line="147" column="35" selection-start-line="147" selection-start-column="35" selection-end-line="147" selection-end-column="35" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#329#1206#0" />
+                <element signature="e#1513#1893#0" />
+                <element signature="e#1931#2391#0" />
               </folding>
             </state>
           </provider>
@@ -153,11 +158,11 @@
         <option value="$PROJECT_DIR$/src/Service/login.js" />
         <option value="$PROJECT_DIR$/src/redux/reducers/login_reducer.js" />
         <option value="$PROJECT_DIR$/src/components/Login.js" />
-        <option value="$PROJECT_DIR$/src/components/MyStar.js" />
         <option value="$PROJECT_DIR$/src/redux/reducers/rootReducer.js" />
         <option value="$PROJECT_DIR$/src/components/SearchResult.js" />
         <option value="$PROJECT_DIR$/src/redux/reducers/shopcar_reducer.js" />
         <option value="$PROJECT_DIR$/src/components/ShopCar.js" />
+        <option value="$PROJECT_DIR$/src/components/MyStar.js" />
       </list>
     </option>
   </component>
@@ -310,12 +315,12 @@
       <workItem from="1556370422490" duration="5622000" />
       <workItem from="1556409955790" duration="13526000" />
       <workItem from="1556429306566" duration="4486000" />
-      <workItem from="1556437866090" duration="10902000" />
+      <workItem from="1556437866090" duration="11975000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="254189000" />
+    <option name="totallyTimeSpent" value="255262000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -569,16 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/MyStar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="135" selection-start-line="135" selection-end-line="152" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/redux/reducers/search_reducer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -612,11 +607,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ShopCar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-797">
-          <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+        <state relative-caret-position="421">
+          <caret line="56" column="35" lean-forward="true" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="35" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
             <element signature="e#303#1180#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/MyStar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1372">
+          <caret line="147" column="35" selection-start-line="147" selection-start-column="35" selection-end-line="147" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#329#1206#0" />
+            <element signature="e#1513#1893#0" />
+            <element signature="e#1931#2391#0" />
           </folding>
         </state>
       </provider>

@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Table, Button,Tag ,Popconfirm} from 'antd';
 import {quit_action} from "../redux/actions/reg_action";
 import {connect} from "react-redux";
+import axios from "axios";
 
 
 class MyStar extends Component{
     constructor(props) {
         super(props);
-
-        this.props.init_stardata();
+//构造器的初始化操作
+       /* this.props.init_stardata();*/
+        this.get_star_data(this.props.user_id)
     }
 
      columns = [{
@@ -80,18 +82,23 @@ class MyStar extends Component{
         console.log(this.state.data)*/
     }
 
-/*    init=()=>{
-        for (let i = 0; i < 20; i++) {
-            this.state.data.push({
-                key: i,
-                name: `state资源 ${i}`,
-                type:"state论文",
-                author: `state作者. ${i}`,
-                url:"https://www.jianshu.com/p/9cc2f7696300?from=timeline&isappinstalled=0",
-                author_url:"http://space.bilibili.com/123938419/"
+    get_star_data=(user_id)=>{
+        axios.get(`Http://127.0.0.1:8000/my_collections/${user_id}`, {
+            params: {
+
+            }})
+            .then( (response) =>{
+                console.log(response);
+                //设置收藏夹数据
+                this.props.set_star_data(response.data.item_list)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
             });
-        }
-    }*/
+    }
 
     render()  {
 
@@ -137,7 +144,8 @@ function mapStateToProps(state)
 {
     return{
         data:state.star.star_data,
-        selectedRowKeys:state.star.selectedRowKeys
+        selectedRowKeys:state.star.selectedRowKeys,
+        user_id:state.login.user_id
     }
 }
 
@@ -147,7 +155,8 @@ function mapDispatchToProps(dispatch){
         set_selectedRowKeys:(selectedRowKeys)=>{dispatch({type: "set_selectedRowKeys",selectedRowKeys:selectedRowKeys})},
         delete_stardata:(itemkey)=>{dispatch({type:"delete_stardata",itemkey:itemkey})},
         multidelete_stardata:()=>{dispatch({type:"multidelete_stardata"})},
-        init_stardata:()=>{dispatch({type:"init_stardata"})}
+        init_stardata:()=>{dispatch({type:"init_stardata"})},
+        set_star_data:(data)=>{dispatch({type:"set_star_data",data:data})}
     }
 }
 MyStar=connect(mapStateToProps,mapDispatchToProps)(MyStar)

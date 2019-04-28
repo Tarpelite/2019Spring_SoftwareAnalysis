@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="494ac1a4-7ade-4230-a47d-036c4d80baa6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/FrontEnd/demo1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/demo1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/demo1/src/components/MyStar.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/demo1/src/components/MyStar.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,12 +82,12 @@
       <updated>1556429214659</updated>
       <workItem from="1556429215729" duration="1168000" />
       <workItem from="1556438006147" duration="148000" />
-      <workItem from="1556438155179" duration="5915000" />
+      <workItem from="1556438155179" duration="6596000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7231000" />
+    <option name="totallyTimeSpent" value="7912000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="169" y="70" width="1176" height="736" extended-state="0" />
