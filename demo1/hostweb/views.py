@@ -282,12 +282,12 @@ def expert_home(request):
 
     return JsonResponse(result, json_dumps_params=json_config)
 
-@api_view(['POST'])
+@api_view(['POST', 'DELETE'])
 def add_item_list(request, pk):
+
     if request.method == "POST":
         resource_ID_list = request.data["item_list"]
         user = User.objects.get(user_ID=pk)
-        print(resource_ID_list)
 
         status = False
         try:
@@ -303,6 +303,26 @@ def add_item_list(request, pk):
         }
 
         return JsonResponse(result, json_dumps_params=json_config)
+    
+    elif request.method == "DELETE":
+       resource_ID_list = request.data["item_list"]
+       user = User.objects.get(user_ID=pk)
+       status = False
+
+       for resource_ID in resource_ID_list:
+               try:
+                    r = Resource.objects.get(resource_ID=resource_ID)
+                    item = ItemCart.objects.get(user_ID = user, resource_ID=r)
+               except ItemCart.objects.DoesNotExist:
+                   print(resource_ID)
+                   return HttpResponse(status=404)
+               item.delete()
+       status  = True
+       result = {
+            "status":status,
+        } 
+       return JsonResponse(result, json_dumps_params=json_config) 
+
 
 def remove_item_list(request, pk):
 
