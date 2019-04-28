@@ -4,12 +4,12 @@ import {connect} from "react-redux";
 import axios from "axios"
 
 const count = 3;
-const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
+
 class SearchPage extends Component{
 
     search=(keyword)=>{
         this.props.loading();
-        axios.get("Http://127.0.0.1:8000/search", {
+        axios.get(`Http://127.0.0.1:8000/search/${this.props.user_id}`, {
             params: {
                 keywords: keyword
             }})
@@ -56,12 +56,12 @@ class SearchPage extends Component{
                 /*loadMore={loadMore}*/
                 dataSource={this.props.result_list}
                 renderItem={item => (
-                    <List.Item actions={[<Icon type={"star"}/>]}>
+                    <List.Item actions={[<a>购买</a>, <Icon type={"star"}/>]}>
                         <Skeleton avatar title={false} loading={item.loading} active>
                             <List.Item.Meta
                                 /*avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}*/
-                                title={<a href="https://ant.design">{item.title}</a>}
-                                description={<div><p>作者：</p> <a href="https://www.baidu.com/s?ie=UTF-8&wd=%E4%BD%9C%E8%80%85" target="_Blank">作者{item.author}</a></div>}
+                                title={<a href={item.url}>{item.title}</a>}
+                                description={<div><p>作者：</p> <a href={item.url} target="_Blank">{item.authors}</a></div>}
                             />
                             <div><p>价格：{item.price}</p></div>
                         </Skeleton>
@@ -79,7 +79,8 @@ function mapStateToProps(state)
     return{
         dissearch_flag:state.search.dis_flag,
         result_list:state.search.search_result_list,
-        keyword:state.search.keyword
+        keyword:state.search.keyword,
+        user_id:state.login.user_id
     }
 }
 
