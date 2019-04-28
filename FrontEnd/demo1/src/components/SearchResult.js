@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Input,List,Skeleton,Avatar,Icon} from "antd";
+import {Input, List, Skeleton, Avatar, Icon, Tag} from "antd";
 import {connect} from "react-redux";
 import axios from "axios"
 
@@ -20,17 +20,23 @@ class SearchPage extends Component{
             .catch(function (error) {
                 console.log(error);
             })
-        /*axios.get(`https://randomuser.me/api/?results=${keyword}&inc=name,gender,email,nat&noinfo`)
+
+    }
+    //收藏方法
+    star=(resource_id)=>{
+        /*this.props.loading();*/
+        axios.post(`Http://127.0.0.1:8000/star/${this.props.user_id}/`, {
+            params: {
+                user_ID:this.props.user_id,
+                resource_ID:resource_id
+            }})
             .then( (response) =>{
                 console.log(response);
-                this.props.set_res(response.data.results,keyword)
+
             })
             .catch(function (error) {
                 console.log(error);
             })
-            .then(function () {
-                // always executed
-            });*/
     }
     componentDidMount() {
         this.search(this.props.keyword)
@@ -56,12 +62,12 @@ class SearchPage extends Component{
                 /*loadMore={loadMore}*/
                 dataSource={this.props.result_list}
                 renderItem={item => (
-                    <List.Item actions={[<a>购买</a>, <Icon type={"star"}/>]}>
+                    <List.Item actions={[<a>加入购物车</a>, <a onClick={()=>{console.log(item);this.star(item.resource_ID)}}><Icon type={"star"} /></a>]}>
                         <Skeleton avatar title={false} loading={item.loading} active>
                             <List.Item.Meta
                                 /*avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}*/
                                 title={<a href={item.url}>{item.title}</a>}
-                                description={<div><p>作者：</p> <a href={item.url} target="_Blank">{item.authors}</a></div>}
+                                description={<div> <p>{`简介：${item.intro}`}</p><a href={item.url} target="_Blank">{item.authors}</a><Tag color={'geekblue'} >文章类型</Tag></div>}
                             />
                             <div><p>价格：{item.price}</p></div>
                         </Skeleton>
