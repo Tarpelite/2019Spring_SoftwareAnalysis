@@ -106,9 +106,9 @@ def search(request, pk):
         #print(keywords)
         ans = Resource.objects.filter(title__contains=keywords)
         resource_list = []
-        author_IDs = []
         cnt = 0
         for obj in ans:
+            author_IDs = []
             record = {}
             resource_ID = obj.resource_ID
             r1 = Resource.objects.get(resource_ID=resource_ID)
@@ -188,10 +188,10 @@ def my_collections(request, pk):
 def my_collections(request, pk):
     ans = starForm.objects.filter(user_ID=pk)
     num = len(ans)
-    resource_list = []
-    author_IDs = [] 
+    resource_list = [] 
     cnt = 0
     for obj in ans:
+        author_IDs = []
         record = {}
         resource_ID = obj.resource_ID
         r1 = Resource.objects.get(resource_ID=resource_ID)
@@ -245,9 +245,9 @@ def buyed_resource(request):
     u1 = User.objects.get(username=username)
     res = Transaction.objects.filter(user_ID=u1)
     resource_list = []
-    author_IDs = []
     cnt = 0
     for resource in res:
+        author_IDs = []
         record = {}
         r1 = Resource.objects.get(resource_ID=resource)
         record['rank'] = cnt
@@ -365,8 +365,8 @@ def item_cart(request, pk):
     res = ItemCart.objects.filter(user_ID=pk)
     cnt = 0
     item_list = []
-    author_IDs = []
     for item in res:
+        author_IDs = []
         record = {}
         r1 = item.resource_ID
         #r1 = Resource.objects.get(resource_ID=item.resource_ID.resource_ID)
@@ -376,7 +376,8 @@ def item_cart(request, pk):
         record['type'] = r1.Type
         record['intro'] = r1.intro
         record['authors'] = r1.authors
-        aus = r1.authors.split(",")
+        aus =[r1.authors.split(",")]
+        print(aus)
         for au in aus:
            res_dict = {}
            res_dict['name'] = au
