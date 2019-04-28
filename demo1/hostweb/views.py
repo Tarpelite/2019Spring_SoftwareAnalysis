@@ -106,6 +106,7 @@ def search(request, pk):
         #print(keywords)
         ans = Resource.objects.filter(title__contains=keywords)
         resource_list = []
+        author_IDs = []
         cnt = 0
         for obj in ans:
             record = {}
@@ -118,6 +119,17 @@ def search(request, pk):
             record['price'] = r1.price
             record['authors'] = r1.authors
             record['url'] = r1.url
+            aus = r1.authors.split(",")
+            for au in aus:
+                res_dict = {}
+                res_dict['name'] = au 
+                try:
+                    ids = Author.objects.get(name=au)
+                    res_dict['author_ID'] = ids.author_ID
+                except Author.DoesNotExist:
+                    res_dict['author_ID'] = -1 
+                author_IDs.append(res_dict)
+            record['author_IDs'] = author_IDs    
             cnt += 1
             is_star = starForm.objects.filter(user_ID=pk, resource_ID=resource_ID)
             if len(is_star)> 0:
@@ -177,6 +189,7 @@ def my_collections(request, pk):
     ans = starForm.objects.filter(user_ID=pk)
     num = len(ans)
     resource_list = []
+    author_IDs = [] 
     cnt = 0
     for obj in ans:
         record = {}
@@ -189,6 +202,17 @@ def my_collections(request, pk):
         record['price'] = r1.price
         record['authors'] = r1.authors
         record['url'] = r1.url
+        aus = r1.authors.split(",")
+        for au in aus:
+           res_dict = {}
+           res_dict['name'] = au
+           try:
+                ids = Author.objects.get(name=au)
+                res_dict['author_ID'] = ids.author_ID
+           except Author.DoesNotExist:
+               res_dict['author_ID'] = -1 
+           author_IDs.append(res_dict) 
+        record['author_IDs']= author_IDs  
         cnt += 1
         resource_list.append(record)
 
@@ -221,6 +245,7 @@ def buyed_resource(request):
     u1 = User.objects.get(username=username)
     res = Transaction.objects.filter(user_ID=u1)
     resource_list = []
+    author_IDs = []
     cnt = 0
     for resource in res:
         record = {}
@@ -233,6 +258,16 @@ def buyed_resource(request):
         record['authors'] = r1.authors
         record['url'] = r1.url
         record['price'] = r1.price
+        aus = r1.authors.split(",")
+        for au in aus:
+           res_dict = {}
+           res_dict['name'] = au
+           ids = Author.objects.get(name=au) 
+           if len(ids)>0:
+               res_dict['author_ID'] = ids.author_ID
+           else:
+               res_dict['author_ID'] = -1
+           author_IDs.append(res_dict)       
         resource_list.append(record)
 
     result = {
@@ -330,6 +365,7 @@ def item_cart(request, pk):
     res = ItemCart.objects.filter(user_ID=pk)
     cnt = 0
     item_list = []
+    author_IDs = []
     for item in res:
         record = {}
         r1 = item.resource_ID
@@ -340,8 +376,21 @@ def item_cart(request, pk):
         record['type'] = r1.Type
         record['intro'] = r1.intro
         record['authors'] = r1.authors
+        aus = r1.authors.split(",")
+        for au in aus:
+           res_dict = {}
+           res_dict['name'] = au
+           ids = Author.objects.get(name=au) 
+           try:
+                ids = Author.objects.get(name=au)
+                res_dict['author_ID'] = ids.author_ID
+           except Author.DoesNotExist:
+               res_dict['author_ID'] = -1 
+           author_IDs.append(res_dict)          
+
         record['url'] = r1.url
         record['price'] = r1.price
+        record['author_IDs'] = author_IDs
         item_list.append(record)
 
     result = {

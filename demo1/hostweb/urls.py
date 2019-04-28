@@ -8,7 +8,7 @@ urlpatterns = [
     path('search/<int:pk>/', views.search),
     path('profile/<int:pk>/', views.profile),
     path('star/<int:pk>/', views.star),
-    path('my_collections/', views.my_collections),
+    path('my_collections/<int:pk>/', views.my_collections),
     path('my_account/', views.my_account),
     path('buyed_resource/', views.buyed_resource),
     path('expert_home/', views.expert_home),
