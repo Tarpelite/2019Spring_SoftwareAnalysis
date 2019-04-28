@@ -4,3 +4,4 @@ from hostweb.models import *
 
 admin.site.register(User)
 admin.site.register(Author)
+admin.site.register(ItemCart)
