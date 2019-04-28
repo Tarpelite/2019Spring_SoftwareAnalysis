@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d34fa179-74cb-4373-aa05-1f4b8f0bb9f9" name="Default Changelist" comment="更新部分购物车前端代码">
-      <change beforePath="$PROJECT_DIR$/src/components/SearchResult.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchResult.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ShopCar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShopCar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducers/shopcar_reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/shopcar_reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -62,7 +60,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/ShopCar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-209">
+            <state relative-caret-position="-797">
               <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -314,12 +312,12 @@
       <workItem from="1556370422490" duration="5622000" />
       <workItem from="1556409955790" duration="13526000" />
       <workItem from="1556429306566" duration="4486000" />
-      <workItem from="1556437866090" duration="9936000" />
+      <workItem from="1556437866090" duration="10181000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253223000" />
+    <option name="totallyTimeSpent" value="253468000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -616,7 +614,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ShopCar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-209">
+        <state relative-caret-position="-797">
           <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
