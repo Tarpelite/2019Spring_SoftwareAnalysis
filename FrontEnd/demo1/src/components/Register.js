@@ -76,7 +76,7 @@ class Register extends Component{
     //注册提交到后端的测试方法
     registerSubmit_test=(e)=>{
         e.preventDefault();
-        axios.get('http://www.buaatech.top:8068/register', {
+        axios.get('Http://127.0.0.1:8000/register', {
             params: {
                 username: this.props.form.getFieldValue("registerUsername"),
                 passwd:this.props.form.getFieldValue("password"),

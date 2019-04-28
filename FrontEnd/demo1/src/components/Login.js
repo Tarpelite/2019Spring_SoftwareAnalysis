@@ -7,6 +7,8 @@ import {regaction, close_regaction, login_action} from "../redux/actions/reg_act
 import "../css/background.css"
 import Register from "./Register";
 import axios from "axios"
+
+
 const {
     Header, Content, Footer, Sider,
 } = Layout;
@@ -17,23 +19,8 @@ class Login extends Component{
     constructor(props) {
         super(props);
 
-    this.state={
-    /*registerFlag:false,*/
-        /*loginflag:false*/
-    }
     }
 
-
-
-    /*registerSubmit = (e) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-
-            }
-        });
-    }*/
 
 componentDidMount() {
         /*console.log(this.props.registerFlag)*/
@@ -60,7 +47,8 @@ componentDidMount() {
         console.log("捕获的用户名为：")
         console.log(this.props.form.getFieldValue("loginUserName"))
         console.log(this.props.form.getFieldValue("loginPassword"))
-        axios.get('http://www.buaatech.top:8068/login', {
+
+        axios.get('Http://127.0.0.1:8000/login', {
             params: {
                 username: this.props.form.getFieldValue("loginUserName"),
                 passwd:this.props.form.getFieldValue("loginPassword")
