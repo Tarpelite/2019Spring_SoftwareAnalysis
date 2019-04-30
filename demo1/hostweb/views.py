@@ -435,6 +435,8 @@ def purchase(request, pk):
                 for item in item_list:
                     resource_ID = Resource.objects.get(resource_ID=item)
                     Transaction.objects.create(user_ID=u1, resource_ID=resource_ID, created_time=timezone.now())
+                    i1 = ItemCart.objects.get(user_ID=u1, resource_ID=resource_ID)
+                    i1.delete()
                 u1.balance -= total_cost
                 status = True
             except ObjectDoesNotExist:
