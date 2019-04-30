@@ -25,8 +25,8 @@ def User_list(request):
 def resource_list(request):
 
     if request.method == "GET":
-        resouces = Resource.objects.all()
-        se = ResourceSerializer(resouces, many=True)
+        resources = Resource.objects.all()
+        se = ResourceSerializer(resources, many=True)
         return JsonResponse(se.data, safe=False)
 
 def login(request):
@@ -409,7 +409,6 @@ def item_cart(request, pk):
         record['url'] = r1.url
         record['price'] = r1.price
         record['author_IDs'] = author_IDs
-        cnt += 1
         item_list.append(record)
 
     result = {
@@ -432,8 +431,8 @@ def purchase(request, pk):
     else:
         try:
             for item in item_list:
-                resouce_ID = item['resource_ID']
-                Transaction.objects.create(user_ID=u1, resouce_ID=resouce_ID)
+                resource_ID = item['resource_ID']
+                Transaction.objects.create(user_ID=u1, resource_ID=resource_ID)
             u1.balance -= total_cost
             status = True
         except ObjectDoesNotExist:
