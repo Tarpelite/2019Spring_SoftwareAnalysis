@@ -12,6 +12,8 @@ class author(scrapy.Item):
     specialties=scrapy.Field()
     h=scrapy.Field()
     i10=scrapy.Field()
+    image_urls=scrapy.Field()
+    images=scrapy.Field()
 
 class article(scrapy.Item):
     data=scrapy.Field()
@@ -37,6 +39,7 @@ class AuthorSpider(CrawlSpider):
         au=author()
         au['name']=response.css('#gsc_prf_in::text').extract()
         au['citations']=response.css('.gsc_rsb_std::text').get()
+        au['image_urls']=[response.urljoin(response.css('#gsc_prf_pua img::attr(src)').get())]
         if response.css('.gsc_rsb_aa').get() is not None:
             au['coworkers']=[]
             for co in response.css('.gsc_rsb_a_desc'):
@@ -56,7 +59,6 @@ class AuthorSpider(CrawlSpider):
             next_art=art.css('::attr(data-href)').get()
             yield scrapy.Request(response.urljoin(next_art),callback=self.parse_article,meta={'dont_redirect':True})
         yield au
-    
     def parse_article(self,response):
         art=article()
         dic={}    
@@ -73,3 +75,4 @@ class AuthorSpider(CrawlSpider):
         art['url']=response.css('.gsc_vcd_title_link::attr(href)').get()
         art['title']=response.css('.gsc_vcd_title_link::text').get()
         yield art
+        
