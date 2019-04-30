@@ -45,11 +45,16 @@ def login(request):
     except ObjectDoesNotExist:
         status = False
 
+    try:
+        url = user.avator.url
+    except Exception as e:
+        url = ""
+
     result = {
         "status": status,
         "is_expert": is_expert,
         "user_ID":user.user_ID,
-        "avator_url":user.avator
+        "avator_url":url
     }
 
     return JsonResponse(result, json_dumps_params=json_config)
@@ -307,6 +312,11 @@ def expert_home(request, pk):
         articles.append(record)
         if cnt > 10:
             break
+    
+    try:
+        url = au1.avator.url
+    except Exception as e:
+        url = ""
 
     result = {
         "num":cnt,
@@ -318,7 +328,7 @@ def expert_home(request, pk):
         "article_numbers": au1.article_numbers,
         "h_index": au1.h_index,
         "g_index": au1.g_index,
-        "avator": au1.avator
+        "avator": url
     }
 
     return JsonResponse(result, json_dumps_params=json_config)
