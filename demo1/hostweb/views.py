@@ -394,7 +394,7 @@ def item_cart(request, pk):
         record['intro'] = r1.intro
         record['authors'] = r1.authors
         record['type'] = r1.Type
-        aus =[r1.authors.split(",")]
+        aus = r1.authors.split(",")
         print(aus)
         for au in aus:
            res_dict = {}
