@@ -42,7 +42,7 @@ class Resource(models.Model):
     )
 
     resource_ID = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, unique=True)
     authors = models.TextField(blank=True)  # split by ','
     intro = models.TextField(blank=True)
     url = models.TextField(blank=True)
@@ -76,6 +76,7 @@ class Author(models.Model):
     article_numbers = models.IntegerField(default=0, blank=True)
     h_index = models.IntegerField(default=0, blank=True)
     g_index = models.IntegerField(default=0, blank=True)
+    avator = models.ImageField(upload_to="author_avator", blank=True)
 
     def __str__(self):
         return self.name
@@ -134,7 +135,10 @@ class A2R(models.Model):
 
     def __str__(self):
 
-        return "{0}-{1}".format(self.user_ID.username, self.resource_ID.title)
+        return "{0}-{1}".format(self.author_ID.name, self.resource_ID.title)
+    class Meta:
+        unique_together=("author_ID", "resource_ID")
+
 
 
 class ItemCart(models.Model):

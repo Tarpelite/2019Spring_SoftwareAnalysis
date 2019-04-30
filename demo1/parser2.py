@@ -23,19 +23,17 @@ with open(data_path, encoding="utf-8") as f:
         name = item.get("name", "")[0]
         citation_times = item.get("citations", "")
         articles = item.get("articles", "")
-        article_nums = len(articles)
-        h = item.get("h", "")
-        g = item.get("i10", "")
-        try:
-            Author.objects.create(
-                name=name,
-                domain = domain_text,
-                citation_times=citation_times,
-                article_numbers = article_nums,
-                h_index = h,
-                g_index = g,
-            )
-        except Author.DoesNotExist :
-            continue
+        article_list = []
+        for a in articles:
+            if isinstance(a, list):
+                for a_ in a:
+                    try:
+                        print(a_)
+                        a1 = Resource.objects.get(title=a_)
+                        au1 = Author.objects.get(name=name)
+                    except Exception as e:
+                        continue
+                    A2R.objects.create(author_ID=au1, resource_ID=a1)
+                    print(a1)
 
-
+            

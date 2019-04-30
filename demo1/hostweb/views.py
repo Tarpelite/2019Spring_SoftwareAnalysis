@@ -172,7 +172,7 @@ def star(request, pk):
 
     elif request.method == 'DELETE':
         try:
-            u1 = User.objects.get(User_ID=pk)
+            u1 = User.objects.get(user_ID=pk)
             r_ids = request.data['resource_ID']
             for r_id in r_ids:
                 r1 = Resource.objects.get(resource_ID=r_id)

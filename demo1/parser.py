@@ -48,6 +48,6 @@ with open(data_path, encoding="utf-8") as f:
                                 patent_number=patent_number,
                                 patent_applicant_number=patent_application_number,
                                 Type=Type)
-            except Resource.DoesNotExist:
+            except Exception as e:
                 continue
         
