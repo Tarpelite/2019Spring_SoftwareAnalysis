@@ -21,6 +21,7 @@ class User(models.Model):
     avatar_url = models.CharField(max_length=255, blank=True)
     balance = models.IntegerField(default=0)
     name = models.CharField(max_length=255, blank=True, null=True)
+    avator = models.ImageField(upload_to="user_avator", blank=True)
 
     def is_expert(self):
         return self.Type == 'E'

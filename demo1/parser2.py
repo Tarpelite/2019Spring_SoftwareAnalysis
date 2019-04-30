@@ -27,8 +27,14 @@ with open(data_path, encoding="utf-8") as f:
         images = item.get("images", "")
         if len(images) > 0:
             path = images[0]['path'][5:]
-            print(path)
-        '''
+            path = "author_avator/" + path
+            try:
+                au1 = Author.objects.get(name=name)
+            except Author.DoesNotExist:
+                continue
+            au1.avator = path
+            
+        '''  
         for a in articles:
             if isinstance(a, list):
                 for a_ in a:
@@ -38,7 +44,9 @@ with open(data_path, encoding="utf-8") as f:
                         au1 = Author.objects.get(name=name)
                     except Exception as e:
                         continue
-                    A2R.objects.create(author_ID=au1, resource_ID=a1)
-                    print(a1)
-        '''
-            
+                    try:
+                        A2R.objects.create(author_ID=au1, resource_ID=a1)
+                        print(a1)
+                    except Exception as e:
+                        continue
+        '''    

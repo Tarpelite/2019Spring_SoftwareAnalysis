@@ -48,7 +48,8 @@ def login(request):
     result = {
         "status": status,
         "is_expert": is_expert,
-        "user_ID":user.user_ID
+        "user_ID":user.user_ID,
+        "avator_url":user.avator
     }
 
     return JsonResponse(result, json_dumps_params=json_config)
@@ -284,7 +285,7 @@ def buyed_resource(request):
     return JsonResponse(result, json_dumps_params=json_config)
 
 
-
+@api_view(['GET'])
 def expert_home(request, pk):
 
     au1 = Author.objects.get(author_ID=pk)
@@ -317,11 +318,12 @@ def expert_home(request, pk):
         "article_numbers": au1.article_numbers,
         "h_index": au1.h_index,
         "g_index": au1.g_index,
+        "avator": au1.avator
     }
 
     return JsonResponse(result, json_dumps_params=json_config)
 
-@api_view(['POST', 'DELETE'])
+@api_view(['POST', 'DELETE', 'GET'])
 def add_item_list(request, pk):
 
     if request.method == "POST":
@@ -352,7 +354,7 @@ def add_item_list(request, pk):
                try:
                     r = Resource.objects.get(resource_ID=resource_ID)
                     item = ItemCart.objects.get(user_ID = user, resource_ID=r)
-               except ItemCart.objects.DoesNotExist:
+               except ItemCart.DoesNotExist:
                    print(resource_ID)
                    return HttpResponse(status=404)
                item.delete()
