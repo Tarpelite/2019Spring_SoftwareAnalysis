@@ -172,7 +172,10 @@ def star(request, pk):
 
     elif request.method == 'DELETE':
         try:
-            s1 = starForm.objects.get(form_ID=pk)
+            u1 = User.objects.get(User_ID=pk)
+            r_id = request.data['resource_ID']
+            r1 = Resource.objects.get(resource_ID=r_id)
+            s1 = starForm.objects.get(user_ID=u1, resource_ID=r1)
         except starForm.DoesNotExist:
             return HttpResponse(status=404)
         s1.delete()
