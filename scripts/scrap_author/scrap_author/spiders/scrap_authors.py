@@ -39,7 +39,7 @@ class AuthorSpider(CrawlSpider):
         au=author()
         au['name']=response.css('#gsc_prf_in::text').extract()
         au['citations']=response.css('.gsc_rsb_std::text').get()
-        au['image_urls']=response.urljoin(response.css('#gsc_prf_pua img::attr(src)').get())
+        au['image_urls']=[response.urljoin(response.css('#gsc_prf_pua img::attr(src)').get())]
         if response.css('.gsc_rsb_aa').get() is not None:
             au['coworkers']=[]
             for co in response.css('.gsc_rsb_a_desc'):

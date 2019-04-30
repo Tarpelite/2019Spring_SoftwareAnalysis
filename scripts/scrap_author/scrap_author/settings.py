@@ -14,8 +14,6 @@ BOT_NAME = 'scrap_author'
 SPIDER_MODULES = ['scrap_author.spiders']
 NEWSPIDER_MODULE = 'scrap_author.spiders'
 IMAGES_STORE = os.path.join(os.path.dirname(os.path.realpath(__file__)),'Avatar')
-IMAGES_URLS_FIELD = 'author.image_urls'
-IMAGES_RESULT_FIELD = 'author.images'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'scrap_author (+http://www.yourdomain.com)'
 
@@ -68,9 +66,9 @@ FEED_EXPORT_ENCODING='utf-8'
 ITEM_PIPELINES = {
 #    'scrap_author.pipelines.ScrapAuthorPipeline': 400,
 #    'scrap_author.pipelines.ScrapArticlePipeline':300,
-    'scrap_author.pipelines.AuthorJsonWriterPipeline':1,
-    'scrap_author.pipelines.ArticleJsonWriterPipeline':1,
-    'scrapy.pipelines.images.ImagesPipeline': 2,
+    'scrap_author.pipelines.AuthorJsonWriterPipeline':2,
+    'scrap_author.pipelines.ArticleJsonWriterPipeline':2,
+    'scrapy.pipelines.images.ImagesPipeline': 1,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
