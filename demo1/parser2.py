@@ -24,6 +24,27 @@ with open(data_path, encoding="utf-8") as f:
         citation_times = item.get("citations", "")
         articles = item.get("articles", "")
         article_list = []
+        coworkers = item.get("coworkers")
+        
+        if coworkers:
+            for t in coworkers:
+                name2 = t[0]
+                try:
+                    au1 = Author.objects.get(name = name)
+                except:
+                    au1 = Author.objects.create(name = name)
+                try:
+                    au2 = Author.objects.get(name = name2)
+                except Author.DoesNotExist:
+                    au2 = Author.objects.create(name = name2)
+
+                try:
+                    relationship = A2A.objects.get(author1=au1, author2=au2)
+                except A2A.DoesNotExist:
+                    A2A.objects.create(author1=au1, author2=au2)
+
+
+        '''
         images = item.get("images", "")
         if len(images) > 0:
             path = images[0]['path'][5:]
@@ -33,6 +54,7 @@ with open(data_path, encoding="utf-8") as f:
             except Author.DoesNotExist:
                 continue
             au1.avator = path
+        '''
             
         '''  
         for a in articles:

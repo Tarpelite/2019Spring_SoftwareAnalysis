@@ -22,4 +22,7 @@ urlpatterns = [
     path('PUB_pass/', views.PUB_pass),
     path('api-test/Users/', views.User_list),
     path('api-test/resource_list/', views.resource_list),
+    path('expert_profile_edit/<int:pk>/', views.expert_profile_edit),
+    path('expert_relation_draw/<int:pk>/', views.expert_relation_draw),
+
 ]

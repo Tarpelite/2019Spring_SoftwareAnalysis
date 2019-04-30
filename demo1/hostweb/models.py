@@ -179,6 +179,17 @@ class publish_item_application_form(models.Model):
     def __str__(self):
         return "{0}-{1}".format(self.author_ID.name, self.title)
 
+class A2A(models.Model):
+    
+    author1  = models.ForeignKey(Author, related_name='s', on_delete=models.CASCADE)
+    author2  = models.ForeignKey(Author, related_name='t', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "{0}-{1}".format(self.author1.name, self.author2.name)
+    class Meta:
+        unique_together = ("author1", "author2")
+
+
 
 
 

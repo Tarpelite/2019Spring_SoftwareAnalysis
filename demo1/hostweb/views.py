@@ -88,7 +88,7 @@ def index(request):
     '''
     return the main page
     :param request: json contains 1 field:username
-    :return:
+    :return: jsonresponse
     '''
 
     if request.method == "GET":
@@ -175,6 +175,8 @@ def expert_profile_edit(request, pk):
             au1.sex = request.data['sex']
             au1.name = request.data['name']
             au1.institute = request.data['institute']
+            au1.domain = request.data['domain']
+            au1.save()
         except Author.DoesNotExist:
             return HttpResponse(status=404)
         return HttpResponse(status=200)
@@ -304,6 +306,58 @@ def buyed_resource(request, pk):
 
     return JsonResponse(result, json_dumps_params=json_config)
 
+@api_view(['GET'])
+def expert_relation_draw(request, pk):
+    result = {}
+    try:
+        au1 = Author.objects.get(author_ID=pk)
+    except Author.DoesNotExist:
+        return HttpResponse(status=404)
+    nodes = []
+    name_list = [] 
+    links = []
+    au_pool = A2A.objects.filter(author1 = au1)
+    main_node = {
+        'name':au1.name,
+        'symbol':'star'
+    }
+    nodes.append(main_node)
+    for a2a in au_pool:
+        au2 = a2a.author2
+        if au2.name not in name_list:
+            name_list.append(au2.name)
+        link = {
+            "source":au1.name,
+            "target":au2.name,
+            "weight":1,
+            "name":"coworker"
+        }
+        links.append(link)
+
+        au3_pool = A2A.objects.filter(author1 = au2)
+        for a2a3 in au3_pool:
+            au3  = a2a3.author2
+            if au3.name in name_list:
+                link = {
+                    "source":au2.name,
+                    "target":au3.name,
+                    "weight":1,
+                    "name":"coworker"
+                }
+                links.append(link)
+    for name in name_list:
+        node = {
+            'name':name
+        }
+        nodes.append(node)
+    result = {
+        "nodes":nodes,
+        "links":links
+    }
+    return JsonResponse(result, status = 200)
+
+        
+
 
 @api_view(['GET'])
 def expert_home(request, pk):
@@ -332,6 +386,7 @@ def expert_home(request, pk):
         url = au1.avator.url
     except Exception as e:
         url = ""
+    
 
     result = {
         "num":cnt,
