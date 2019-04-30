@@ -15,6 +15,7 @@ json_config = {
     'ensure_ascii': False,
 }
 
+
 def User_list(request):
 
     if request.method == "GET":
@@ -165,6 +166,20 @@ def profile(request, pk):
             return JsonResponse(se.data)
         return JsonResponse(se.errors, status=400)
 
+@api_view(['PUT'])
+def expert_profile_edit(request, pk):
+    if request.method == 'PUT':
+        try:
+            au1 = Author.objects.get(author_ID=pk)
+            data = request.data 
+            au1.sex = request.data['sex']
+            au1.name = request.data['name']
+            au1.institute = request.data['institute']
+        except Author.DoesNotExist:
+            return HttpResponse(status=404)
+        return HttpResponse(status=200)
+
+
 @api_view(['POST', 'DELETE'])
 def star(request, pk):
     if request.method == 'POST':
@@ -274,14 +289,12 @@ def buyed_resource(request, pk):
            res_dict = {}
            res_dict['name'] = au
            try:
-                ids = Author.objects.get(name=au) 
-                if len(ids)>0:
-                    res_dict['author_ID'] = ids.author_ID
-                else:
-                    res_dict['author_ID'] = ids.author_ID
-           except Exception as e:
-                res_dict['author_ID'] = -1
-           author_IDs.append(res_dict)       
+                ids = Author.objects.get(name=au)
+                res_dict['author_ID'] = ids.author_ID
+           except Author.DoesNotExist:
+               res_dict['author_ID'] = -1 
+           author_IDs.append(res_dict) 
+        record['author_IDs'] = author_IDs      
         resource_list.append(record)
 
     result = {
