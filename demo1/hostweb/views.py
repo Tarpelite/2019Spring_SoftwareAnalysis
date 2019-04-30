@@ -285,11 +285,9 @@ def buyed_resource(request):
 
 
 
-def expert_home(request):
+def expert_home(request, pk):
 
-    username = request.GET.get('username')
-    u1 = User.objects.get(username=username)
-    au1 = Author.objects.get(bind=u1)
+    au1 = Author.objects.get(author_ID=pk)
     articles = []
 
     res = A2R.objects.filter(author_ID =au1)
