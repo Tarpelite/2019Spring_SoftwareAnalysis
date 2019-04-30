@@ -373,6 +373,7 @@ def item_cart(request, pk):
         author_IDs = []
         record = {}
         r1 = item.resource_ID
+        record['resouce_ID'] = r1.resource_ID
         #r1 = Resource.objects.get(resource_ID=item.resource_ID.resource_ID)
         record['rank'] = cnt
         cnt += 1
@@ -396,6 +397,7 @@ def item_cart(request, pk):
         record['url'] = r1.url
         record['price'] = r1.price
         record['author_IDs'] = author_IDs
+        cnt += 1
         item_list.append(record)
 
     result = {

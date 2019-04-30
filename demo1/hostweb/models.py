@@ -146,7 +146,8 @@ class ItemCart(models.Model):
     r_ID = models.AutoField(primary_key=True)
     user_ID = models.ForeignKey(User, on_delete=models.CASCADE)
     resource_ID = models.ForeignKey(Resource, on_delete=models.CASCADE)
-
+    class Meta:
+        unique_together=("user_ID", "resource_ID")
     def __str__(self):
 
         return "{0}-{1}".format(self.user_ID.username, self.resource_ID.title)
