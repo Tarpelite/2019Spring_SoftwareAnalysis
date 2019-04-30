@@ -127,6 +127,9 @@ class Transaction(models.Model):
 
         return "{0}-{1}".format(self.user_ID.username, self.resource_ID.title)
 
+    class Meta:
+        unique_together=("user_ID", "resource_ID")
+
 
 class A2R(models.Model):
 

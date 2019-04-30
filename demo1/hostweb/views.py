@@ -250,18 +250,17 @@ def my_account(request):
     }
     return JsonResponse(result, json_dumps_params=json_config)
 
+@api_view(['GET'])
+def buyed_resource(request, pk):
 
-def buyed_resource(request):
-
-    username = request.GET.get('username')
-    u1 = User.objects.get(username=username)
+    u1 = User.objects.get(user_ID=pk)
     res = Transaction.objects.filter(user_ID=u1)
     resource_list = []
     cnt = 0
-    for resource in res:
+    for trans in res:
         author_IDs = []
         record = {}
-        r1 = Resource.objects.get(resource_ID=resource)
+        r1 = trans.resource_ID
         record['rank'] = cnt
         cnt += 1
         record['title'] = r1.title
@@ -274,11 +273,14 @@ def buyed_resource(request):
         for au in aus:
            res_dict = {}
            res_dict['name'] = au
-           ids = Author.objects.get(name=au) 
-           if len(ids)>0:
-               res_dict['author_ID'] = ids.author_ID
-           else:
-               res_dict['author_ID'] = -1
+           try:
+                ids = Author.objects.get(name=au) 
+                if len(ids)>0:
+                    res_dict['author_ID'] = ids.author_ID
+                else:
+                    res_dict['author_ID'] = ids.author_ID
+           except Exception as e:
+                res_dict['author_ID'] = -1
            author_IDs.append(res_dict)       
         resource_list.append(record)
 
@@ -418,31 +420,31 @@ def item_cart(request, pk):
 
     return JsonResponse(result, json_dumps_params=json_config)
 
-
+@api_view(['GET', 'POST'])
 def purchase(request, pk):
+    if request.method == 'POST':
+        item_list = request.data['item_list']
+        total_cost = request.data['total_cost']
+        u1 = User.objects.get(user_ID = pk)
+        status = False
 
-    item_list = request.GET.get('item_list')
-    total_cost = request.GET.get('total_cost')
-    u1 = User.objects.get(user_ID = pk)
-    status = False
+        if total_cost > u1.balance:
+            staus = False
+        else:
+            try:
+                for item in item_list:
+                    resource_ID = Resource.objects.get(resource_ID=item)
+                    Transaction.objects.create(user_ID=u1, resource_ID=resource_ID, created_time=timezone.now())
+                u1.balance -= total_cost
+                status = True
+            except ObjectDoesNotExist:
+                status = False
 
-    if total_cost > u1.balance:
-        staus = False
-    else:
-        try:
-            for item in item_list:
-                resource_ID = item['resource_ID']
-                Transaction.objects.create(user_ID=u1, resource_ID=resource_ID)
-            u1.balance -= total_cost
-            status = True
-        except ObjectDoesNotExist:
-            status = False
+        result = {
+            "status": status
+        }
 
-    result = {
-        "status": status
-    }
-
-    return JsonResponse(result, json_dumps_params=json_config)
+        return JsonResponse(result, json_dumps_params=json_config)
 
 
 def apply_for_expert(request):
