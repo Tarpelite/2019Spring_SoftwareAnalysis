@@ -24,6 +24,11 @@ with open(data_path, encoding="utf-8") as f:
         citation_times = item.get("citations", "")
         articles = item.get("articles", "")
         article_list = []
+        images = item.get("images", "")
+        if len(images) > 0:
+            path = images[0]['path'][5:]
+            print(path)
+        '''
         for a in articles:
             if isinstance(a, list):
                 for a_ in a:
@@ -35,5 +40,5 @@ with open(data_path, encoding="utf-8") as f:
                         continue
                     A2R.objects.create(author_ID=au1, resource_ID=a1)
                     print(a1)
-
+        '''
             

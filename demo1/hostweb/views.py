@@ -177,9 +177,9 @@ def star(request, pk):
             for r_id in r_ids:
                 r1 = Resource.objects.get(resource_ID=r_id)
                 s1 = starForm.objects.get(user_ID=u1, resource_ID=r1)
+                s1.delete()
         except starForm.DoesNotExist:
             return HttpResponse(status=404)
-        s1.delete()
         return HttpResponse(status=204)
 
 '''
