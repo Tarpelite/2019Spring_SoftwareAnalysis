@@ -380,6 +380,7 @@ def item_cart(request, pk):
         record['type'] = r1.Type
         record['intro'] = r1.intro
         record['authors'] = r1.authors
+        record['type'] = r1.Type
         aus =[r1.authors.split(",")]
         print(aus)
         for au in aus:
