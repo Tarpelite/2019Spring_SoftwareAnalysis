@@ -4,6 +4,7 @@ from django.http import HttpResponse,JsonResponse
 from hostweb.models import  *
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.base import ContentFile
 import json
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
@@ -718,9 +719,11 @@ def user_avator(request, pk):
         u1 = User.objects.get(user_ID=pk)
         try:
             avator = u1.avator.path
+            print(avator)
             avator_list = list(avator.split("\\"))
             avator = "user_avator/" + avator_list[-1]
         except Exception as e:
+            print(e)
             avator = "user_avator/default.jpg"
         result = {
             'avator':avator
@@ -745,9 +748,11 @@ def author_avator(request, pk):
         u1 = Author.objects.get(author_ID=pk)
         try:
             avator = u1.avator.path
+            print(avator)
             avator_list = list(avator.split("\\"))
             avator = "author_avator/" + avator_list[-1]
         except Exception as e:
+            print(e)
             avator = "author_avator/default.jpg"
         result = {
             'avator':avator
@@ -756,16 +761,17 @@ def author_avator(request, pk):
     elif request.method == 'POST':
         data = request.data
         data = data['File']
-        print(type(data))
+        print(data.name)
         #uuid_name = uuid.uuid4().hex
-        u1 = User.objects.get(user_ID=pk)
+        u1 = Author.objects.get(author_ID=pk)
         u1.avator = data
-        
+        #srcFile = ContentFile(data.read())
         try:
             u1.save()
-            return HttpResponse(status = 200)
+            return HttpResponse('Image upload success!', status = 200)
         except Exception as e:
-            return HttpResponse(status = 404)
+            print(e)
+            return HttpResponse('allowed only via POST', status = 404)
 
 
 

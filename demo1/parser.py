@@ -34,6 +34,7 @@ with open(data_path, encoding="utf-8") as f:
             patent_application_number = data.get("专利申请号", "")
             if patent_number != "":
                 Type = "P2"
+                authors = data.get("发明者")
             else:
                 Type = "P1"
                 authors = data.get("发明者")
