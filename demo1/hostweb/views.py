@@ -756,6 +756,7 @@ def author_avator(request, pk):
     elif request.method == 'POST':
         data = request.data
         data = data['File']
+        print(type(data))
         #uuid_name = uuid.uuid4().hex
         u1 = User.objects.get(user_ID=pk)
         u1.avator = data
