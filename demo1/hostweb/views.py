@@ -5,6 +5,7 @@ from hostweb.models import  *
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 import json
+from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
@@ -17,7 +18,7 @@ json_config = {
     'ensure_ascii': False,
 }
 
-
+@api_view(['GET'])
 def User_list(request):
 
     if request.method == "GET":
@@ -38,15 +39,22 @@ def login(request):
     passwd = request.GET.get('passwd')
     is_expert = False
     status = True
+    error_msg = ""
     #print("{0}-{1}".format(username, passwd))
     try:
-        user = User.objects.get(username=username, passwd=passwd)
-        print(user)
+        user = User.objects.get(username=username)
+        
+         # print(user)
         if user.is_expert():
             is_expert = True
-        status = True
+        if user.passwd == passwd:
+            status = True
+        else:
+            status = False
+            error_msg = "密码错误"
     except ObjectDoesNotExist:
         status = False
+        error_msg = "用户名不存在"
 
     try:
         url = user.avator.url
@@ -99,7 +107,7 @@ def index(request):
         return JsonResponse(se.data, safe=False)
 
 
-
+@cache_page(15*60)
 @api_view(['GET'])
 def search(request, pk):
     '''
@@ -207,13 +215,8 @@ def star(request, pk):
             return HttpResponse(status=404)
         return HttpResponse(status=204)
 
-'''
-@api_view(['GET'])
-def my_collections(request, pk):
-    stars = starForm.objectis.filter(user_ID=pk)
-    resources = Resource.objects.filter()
-'''
 
+@cache_page(15*60)
 @api_view(['GET'])
 def my_collections(request, pk):
     u1 = User.objects.get(user_ID=pk)
@@ -574,31 +577,82 @@ def has_published(request):
 
     return JsonResponse(result, json_dumps_params=json_config)
 
+@api_view(['GET', 'POST'])
+def publish_item_application(request, pk):
+    '''
+        GET：获取该作者发布过的资源列表
+            params:pk:用户ID
+            return:cnt:资源总数
+                   item_list:资源列表
 
-def publish_item_application(request):
+        POST：发布资源
+            params:pk:用户ID
+            return:status：True表示发布成功，False表示发布失败
+    '''
+    if request.method == 'GET':
+        u1 = User.objects.get(user_ID = pk)
+        item_list = []
+        cnt = 0
+        if u1.is_expert():
+            res = A2R.objects.filter(user_ID=u1)
+            for item in res:
+                record = {}
+                r1 = Resource.objects.get(resource_ID=item.resource_ID)
+                record['rank'] = cnt
+                cnt += 1
+                record['title'] = r1.title
+                record['type'] = r1.Type
+                record['intro'] = r1.intro
+                record['authors'] = r1.authors
+                record['url'] = r1.url
+                record['price'] = r1.price
+                item_list.append(record)
 
-    cnt = 0
-    item_list = []
-    try:
-        ans = publish_item_application_form.objects.filter(passed=False)
-        for item in ans:
-            record = {}
-            record['rank'] = cnt
-            cnt += 1
-            record['applicant'] = Author.objects.get(item.author_ID).name
-            record['title'] = item.title
-            record['intro'] = item.intro
-            item_list.append(record)
-            status = True
-    except ObjectDoesNotExist:
-        status = False
+        result = {
+            "cnt": cnt,
+            "item_list": item_list
+        }
 
-    result = {
-        "num": cnt,
-        "item_list": item_list
-    }
+        return JsonResponse(result, json_dumps_params=json_config)
 
-    return JsonResponse(result, json_dumps_params=json_config)
+    elif request.method == 'POST':
+        data = request.data
+        title = data['title']
+        authors = data['authors']
+        intro = data['intro']
+        price = data['price']
+        Type = data['Type']
+        publisher = data['publisher']
+        publish_date = data['publish_date']
+        agency = data['agency']
+        patent_number = data['patent_number']
+        patent_application_number = data['patent_application_number']
+        file = request.FILES.get("file")
+        try:
+            Resource.objects.create(
+                title = title,
+                authors = authors,
+                intro = intro,
+                price = price,
+                Type = Type,
+                publisher = publisher,
+                publish_date = publish_date,
+                agency = agency,
+                patent_number = patent_number,
+                patent_application_number = patent_application_number,
+                file = file
+            )
+        except Exception as e:
+            result = {
+                "status":False
+            }
+            return JsonResponse(result, status=500)
+        
+        result = {
+            "status":True,
+        }
+
+        return JsonResponse(result, status = 201, json_dumps_params=json_config)
 
 
 def U2E_pass(request):

@@ -1,6 +1,6 @@
 import json
 import jsonlines
-data_path = "C:\\酋长的工作区\\2019Spring_SoftwareAnalysis\\scripts\\scrap_author\\article.jl"
+data_path = "C:\\酋长的工作区\\SA_Spider\\article.jl"
 import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE","demo1.settings")
@@ -36,6 +36,7 @@ with open(data_path, encoding="utf-8") as f:
                 Type = "P2"
             else:
                 Type = "P1"
+                authors = data.get("发明者")
             try:
                 Resource.objects.create(url=url,
                                 title=title,

@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User as auth_user
 # Create your models here.
 
 class User(models.Model):
@@ -54,6 +54,7 @@ class Resource(models.Model):
     agency = models.CharField(max_length=255, blank=True)
     patent_number = models.TextField(blank=True)
     patent_applicant_number = models.TextField(blank=True)
+    file = models.FileField(upload_to="demo1/static/files", blank=True)
 
     def __str__(self):
         return self.title
