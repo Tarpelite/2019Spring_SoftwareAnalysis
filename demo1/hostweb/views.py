@@ -10,6 +10,8 @@ from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from hostweb.Se import *
+import hashlib
+import uuid
 
 json_config = {
     'ensure_ascii': False,
@@ -150,7 +152,7 @@ def search(request, pk):
 
 @api_view(['GET', 'PUT'])
 def profile(request, pk):
-    print(request.GET)
+    #print(request.GET)
     try:
         user = User.objects.get(user_ID=pk)
     except User.DoesNotExist:
@@ -159,7 +161,7 @@ def profile(request, pk):
         se = Userserializer(user)
         return JsonResponse(se.data, safe=False)
     elif request.method == "PUT":
-        print(request.data)
+        #print(request.data)
         se = Userserializer(user, data=request.data)
         if se.is_valid():
             se.save()
@@ -654,6 +656,64 @@ def PUB_pass(request):
     }
 
     return JsonResponse(result, json_dumps_params=json_config)
+
+
+@api_view(['GET', 'POST'])
+def user_avator(request, pk):
+    if request.method == 'GET':
+        u1 = User.objects.get(user_ID=pk)
+        try:
+            avator = u1.avator.path
+            avator_list = list(avator.split("\\"))
+            avator = "user_avator/" + avator_list[-1]
+        except Exception as e:
+            avator = "user_avator/default.jpg"
+        result = {
+            'avator':avator
+        }
+        return JsonResponse(result)
+    elif request.method == 'POST':
+        data = request.data
+        data = data['File']
+        #uuid_name = uuid.uuid4().hex
+        u1 = User.objects.get(user_ID=pk)
+        u1.avator = data
+        
+        try:
+            u1.save()
+            return HttpResponse(status = 200)
+        except Exception as e:
+            return HttpResponse(status = 404)
+
+@api_view(['GET', 'POST'])
+def author_avator(request, pk):
+    if request.method == 'GET':
+        u1 = Author.objects.get(author_ID=pk)
+        try:
+            avator = u1.avator.path
+            avator_list = list(avator.split("\\"))
+            avator = "author_avator/" + avator_list[-1]
+        except Exception as e:
+            avator = "author_avator/default.jpg"
+        result = {
+            'avator':avator
+        }
+        return JsonResponse(result)
+    elif request.method == 'POST':
+        data = request.data
+        data = data['File']
+        #uuid_name = uuid.uuid4().hex
+        u1 = User.objects.get(user_ID=pk)
+        u1.avator = data
+        
+        try:
+            u1.save()
+            return HttpResponse(status = 200)
+        except Exception as e:
+            return HttpResponse(status = 404)
+
+
+
 
 
 

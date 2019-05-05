@@ -24,5 +24,6 @@ urlpatterns = [
     path('api-test/resource_list/', views.resource_list),
     path('expert_profile_edit/<int:pk>/', views.expert_profile_edit),
     path('expert_relation_draw/<int:pk>/', views.expert_relation_draw),
-
+    path('user_avator/<int:pk>/', views.user_avator),
+    path('author_avator/<int:pk>/', views.author_avator)
 ]

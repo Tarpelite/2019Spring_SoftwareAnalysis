@@ -1,62 +1,262 @@
 <!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8">
     <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="echarts.min.js"></script>
 </head>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="height:400px"></div>
-    <!-- ECharts单文件引入 -->
-    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <div id="main" style="width: 600px;height:400px;"></div>
     <script type="text/javascript">
-        // 路径配置
-        require.config({
-            paths: {
-                echarts: 'http://echarts.baidu.com/build/dist'
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+            text: 'Les Miserables',
+            subtext: 'Circular layout',
+            top: 'bottom',
+            left: 'right'
+        },
+        tooltip: {},
+        legend: [{
+            // selectedMode: 'single',
+            data: categories.map(function (a) {
+                return a.name;
+            })
+        }],
+        animationDurationUpdate: 1500,
+        animationEasingUpdate: 'quinticInOut',
+        series : [
+            {
+                name: 'Les Miserables',
+                type: 'graph',
+                layout: 'circular',
+                circular: {
+                    rotateLabel: true
+                },
+                data: [
+        {
+            "name": "Eibe Frank",
+            "symbol": "star"
+        },
+        {
+            "name": "Ian H. Witten"
+        },
+        {
+            "name": "Mark Hall"
+        },
+        {
+            "name": "Chris Pal"
+        },
+        {
+            "name": "Bernhard Pfahringer"
+        },
+        {
+            "name": "Geoffrey Holmes"
+        },
+        {
+            "name": "Len Trigg"
+        },
+        {
+            "name": "Gordon W. Paynter"
+        },
+        {
+            "name": "Stefan Kramer"
+        },
+        {
+            "name": "Craig Nevill-Manning"
+        },
+        {
+            "name": "Carl Gutwin"
+        },
+        {
+            "name": "Remco Bouckaert"
+        },
+        {
+            "name": "Albert Bifet"
+        },
+        {
+            "name": "Jesse Read"
+        },
+        {
+            "name": "Sally Jo Cunningham"
+        },
+        {
+            "name": "Niels Landwehr"
+        },
+        {
+            "name": "Felipe Bravo-Marquez"
+        },
+        {
+            "name": "James Foulds"
+        },
+        {
+            "name": "David Milne"
+        },
+        {
+            "name": "黄岚 Lan Huang"
+        },
+        {
+            "name": "Andreas Karwath"
+        }
+    ],
+                links: [
+        {
+            "source": "Eibe Frank",
+            "target": "Ian H. Witten",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Mark Hall",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Mark Hall",
+            "target": "Ian H. Witten",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Chris Pal",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Chris Pal",
+            "target": "Ian H. Witten",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Bernhard Pfahringer",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Geoffrey Holmes",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Len Trigg",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Gordon W. Paynter",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Stefan Kramer",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Craig Nevill-Manning",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Carl Gutwin",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Remco Bouckaert",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Albert Bifet",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Jesse Read",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Sally Jo Cunningham",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Niels Landwehr",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Felipe Bravo-Marquez",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "James Foulds",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "David Milne",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "黄岚 Lan Huang",
+            "weight": 1,
+            "name": "coworker"
+        },
+        {
+            "source": "Eibe Frank",
+            "target": "Andreas Karwath",
+            "weight": 1,
+            "name": "coworker"
+        }
+    ],
+                roam: true,
+                label: {
+                    normal: {
+                        position: 'right',
+                        formatter: '{b}'
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        color: 'source',
+                        curveness: 0.3
+                    }
+                }
             }
-        });
-        require(
-            [
-                'echarts',
-                'echarts/chart/bar', // 使用柱状图就加载bar模块，按需加载
-            ],
-            function (ec) {
-                // 基于准备好的dom，初始化echarts图表
-                var myChart = ec.init(document.getElementById('main')); 
-                
-                var option = {
-                    title:{
-                        text:"近几年被引量"
-                    },
-                    tooltip: {
-                        trigger:"axis"
-                    },
-                    legend: {
-                        data:['引用量']
-                    },
-                    xAxis : [
-                        {
-                            type : 'category',
-                            data : ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019']
-                        }
-                    ],
-                    yAxis : [
-                        {
-                            type : 'value'
-                        }
-                    ],
-                    series : [
-                        {
-                            "name":"引用量",
-                            "type":"bar",
-                            "data":[5, 20, 40, 10, 10, 20, 50, 80]
-                        }
-                    ]
-                };
-        
-                // 为echarts对象加载数据 
-                myChart.setOption(option); 
-            }
-        );
+        ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
     </script>
 </body>
+</html>

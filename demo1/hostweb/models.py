@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 
 class User(models.Model):
@@ -21,7 +20,7 @@ class User(models.Model):
     avatar_url = models.CharField(max_length=255, blank=True)
     balance = models.IntegerField(default=0)
     name = models.CharField(max_length=255, blank=True, null=True)
-    avator = models.ImageField(upload_to="user_avator", blank=True)
+    avator = models.ImageField(upload_to="demo1/static/user_avator", blank=True)
 
     def is_expert(self):
         return self.Type == 'E'
@@ -77,7 +76,7 @@ class Author(models.Model):
     article_numbers = models.IntegerField(default=0, blank=True)
     h_index = models.IntegerField(default=0, blank=True)
     g_index = models.IntegerField(default=0, blank=True)
-    avator = models.ImageField(upload_to="author_avator", blank=True)
+    avator = models.ImageField(upload_to="demo1/static/author_avator", blank=True)
 
     def __str__(self):
         return self.name
